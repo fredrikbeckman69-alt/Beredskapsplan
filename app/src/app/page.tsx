@@ -1,10 +1,10 @@
 import { IntelligenceFeed } from "@/components/intelligence-feed";
 import { VMAStatusBadge } from "@/components/VMAStatusBadge";
+import { CrisisManagementJour } from "@/components/crisis-management-jour";
 import {
   AlertTriangle,
   CheckCircle2,
   Fuel,
-  Users
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -66,37 +66,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-[#2B4645]/80 border border-[#3AA3E0]/10 rounded-3xl p-6 md:p-8 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative group overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#3AA3E0]/10 via-transparent to-transparent opacity-50 transition-opacity duration-500"></div>
-            <div className="relative z-10">
-              <h3 className="text-xl font-semibold mb-6 flex items-center text-white">
-                <Users className="w-6 h-6 mr-3 text-[#3AA3E0]" />
-                Krisledning (Jour)
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-black/20 rounded-2xl border border-white/5">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3AA3E0] to-[#027DC2] text-white flex items-center justify-center font-bold text-sm mr-4 shadow-lg border border-white/10">TR</div>
-                    <div>
-                      <p className="font-semibold text-white">Tore Robertsson</p>
-                      <p className="text-sm text-zinc-400">VD / Högsta ansvar</p>
-                    </div>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-black/20 rounded-2xl border border-white/5">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#1A2F2D] text-zinc-300 flex items-center justify-center font-bold text-sm mr-4 border border-[#3AA3E0]/20">FB</div>
-                    <div>
-                      <p className="font-semibold text-white">Fredrik Beckman</p>
-                      <p className="text-sm text-zinc-400">Beredskapsledare</p>
-                    </div>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CrisisManagementJour />
         </div>
       </div>
     </div>
