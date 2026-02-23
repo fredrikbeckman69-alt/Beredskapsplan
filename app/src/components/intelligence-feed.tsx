@@ -122,7 +122,7 @@ export function IntelligenceFeed() {
                             const sourceItems = groupedItems[source] || [];
                             const isEmpty = sourceItems.length === 0;
                             const isExpanded = expandedSources[source];
-                            const displayItems = isExpanded ? sourceItems : sourceItems.slice(0, 2);
+                            const displayItems = isExpanded ? sourceItems : sourceItems.slice(0, 3);
 
                             return (
                                 <div key={source} className="bg-black/20 rounded-2xl border border-white/5 overflow-hidden">
@@ -176,13 +176,13 @@ export function IntelligenceFeed() {
                                                 </div>
                                             ))}
 
-                                            {!isExpanded && sourceItems.length > 2 && (
+                                            {!isExpanded && sourceItems.length > 3 && (
                                                 <div className="px-2 pb-2 mt-2">
                                                     <button
                                                         onClick={() => toggleSource(source)}
                                                         className="w-full py-2.5 text-sm font-medium text-zinc-400 hover:text-white bg-black/20 hover:bg-black/40 rounded-lg transition-colors border border-dashed border-white/10 flex items-center justify-center"
                                                     >
-                                                        Visa {sourceItems.length - 2} fler händelser
+                                                        Visa {sourceItems.length - 3} fler händelser
                                                         <ChevronDown className="w-4 h-4 ml-1" />
                                                     </button>
                                                 </div>
