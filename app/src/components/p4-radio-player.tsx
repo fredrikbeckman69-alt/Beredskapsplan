@@ -49,7 +49,7 @@ export default function P4RadioPlayer() {
 
                 // Default to P4 Riks or the first one available
                 if (p4Channels.length > 0) {
-                    const defaultChannel = p4Channels.find((c: SRChannel) => c.name.includes('Stockholm')) || p4Channels[0];
+                    const defaultChannel = p4Channels.find((c: SRChannel) => c.name.includes('Malmö')) || p4Channels[0];
                     setSelectedChannel(defaultChannel);
                 }
             } catch (err) {
@@ -206,8 +206,8 @@ export default function P4RadioPlayer() {
                     <button
                         onClick={handlePlayPause}
                         className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 transition-all transform hover:scale-105 ${isPlaying
-                                ? 'bg-red-500 hover:bg-red-600 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
-                                : 'bg-[#3AA3E0] hover:bg-[#2e82b3] shadow-[0_0_20px_rgba(58,163,224,0.4)]'
+                            ? 'bg-red-500 hover:bg-red-600 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            : 'bg-[#3AA3E0] hover:bg-[#2e82b3] shadow-[0_0_20px_rgba(58,163,224,0.4)]'
                             }`}
                     >
                         {isPlaying ? (
