@@ -15,7 +15,7 @@ export default function ITPolicyPage() {
                 {/* Meta data header */}
                 <div className="bg-[#151515] border-b border-[#222] p-6 grid grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
                     <div>
-                        <p className="text-zinc-500 mb-1 font-medium">Typ</p>>
+                        <p className="text-zinc-500 mb-1 font-medium">Typ</p>
                         <p className="text-white font-semibold flex items-center">
                             <FileText className="w-4 h-4 mr-2 text-zinc-400" />
                             Policy
