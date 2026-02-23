@@ -39,19 +39,19 @@ export default function RootLayout({
 
           <div className="relative z-10 flex h-screen w-full">
             {/* Glassmorphic Sidebar */}
-            <div className="hidden md:flex shrink-0 md:w-72 flex-col h-full border-r border-[#3AA3E0]/10 bg-[#2B4645]/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+            <div className="hidden lg:flex shrink-0 lg:w-72 flex-col h-full border-r border-[#3AA3E0]/10 bg-[#2B4645]/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
               <Sidebar />
             </div>
 
             {/* Main Content Area */}
-            <main className="flex-1 min-w-0 overflow-y-auto w-full h-full pb-20 md:pb-0">
+            <main className="flex-1 min-w-0 overflow-y-auto w-full h-full pb-20 lg:pb-0">
               <div className="p-4 md:p-8 lg:p-12 max-w-7xl mx-auto h-full">
                 {children}
               </div>
             </main>
 
             {/* Mobile Bottom Navigation (Sidebar rendered here on small screens) */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50  border-t border-white/10 bg-black/60 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]">
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50  border-t border-white/10 bg-black/60 backdrop-blur-xl pb-safe">
               <Sidebar mobile />
             </div>
           </div>
