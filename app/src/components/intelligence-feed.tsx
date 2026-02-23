@@ -66,6 +66,8 @@ export function IntelligenceFeed() {
         if (source === 'Polisen') return <Image src={polisenLogo} alt="Polisen" width={24} height={24} className="object-contain" />;
         if (source === 'Krisinformation.se') return <Image src={krisinformationLogo} alt="Krisinformation.se" width={24} height={24} className="object-contain rounded-sm" />;
         if (source === 'Länsstyrelsen') return <Image src={lansstyrelsenLogo} alt="Länsstyrelsen" width={24} height={24} className="object-contain" />;
+        if (source === 'CERT-SE') return <ShieldAlert className="w-5 h-5 text-red-500" />;
+        if (source === 'BankID') return <Landmark className="w-5 h-5 text-blue-400" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
 
@@ -74,6 +76,8 @@ export function IntelligenceFeed() {
         if (source === 'Polisen') return 'bg-white/10';
         if (source === 'Krisinformation.se') return 'bg-white/10';
         if (source === 'Länsstyrelsen') return 'bg-white/10';
+        if (source === 'CERT-SE') return 'bg-red-500/20';
+        if (source === 'BankID') return 'bg-blue-500/20';
         return 'bg-yellow-500/20 text-yellow-400';
     };
 
@@ -87,7 +91,7 @@ export function IntelligenceFeed() {
         return acc;
     }, {} as Record<string, IntelligenceItem[]>);
 
-    const baseSources = ['Krisinformation.se', 'Polisen', 'SMHI', 'Länsstyrelsen'];
+    const baseSources = ['Krisinformation.se', 'CERT-SE', 'BankID', 'Polisen', 'SMHI', 'Länsstyrelsen'];
     const sources = [...baseSources].sort((a, b) => {
         const timeA = groupedItems[a]?.length ? new Date(groupedItems[a][0].timestamp).getTime() : 0;
         const timeB = groupedItems[b]?.length ? new Date(groupedItems[b][0].timestamp).getTime() : 0;

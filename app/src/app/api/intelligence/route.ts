@@ -3,20 +3,31 @@ import { fetchKrisinformation } from '@/lib/api/krisinformation';
 import { fetchSMHI } from '@/lib/api/smhi';
 import { fetchPolisen } from '@/lib/api/polisen';
 import { fetchLansstyrelsen } from '@/lib/api/lansstyrelsen';
+import { fetchCERTSE } from '@/lib/api/certse';
+import { fetchBankID } from '@/lib/api/bankid';
 import { IntelligenceItem } from '@/lib/api/types';
 
 export const revalidate = 300; // Cache the whole route for 5 minutes
 
 export async function GET() {
     try {
-        const [krisData, smhiData, polisenData, lansstyrelsenData] = await Promise.all([
+        const [krisData, smhiData, polisenData, lansstyrelsenData, certseData, bankidData] = await Promise.all([
             fetchKrisinformation(),
             fetchSMHI(),
             fetchPolisen(),
-            fetchLansstyrelsen()
+            fetchLansstyrelsen(),
+            fetchCERTSE(),
+            fetchBankID()
         ]);
 
-        const allData: IntelligenceItem[] = [...krisData.items, ...smhiData.items, ...polisenData.items, ...lansstyrelsenData.items];
+        const allData: IntelligenceItem[] = [
+            ...krisData.items,
+            ...smhiData.items,
+            ...polisenData.items,
+            ...lansstyrelsenData.items,
+            ...certseData.items,
+            ...bankidData.items
+        ];
 
         // Sort by timestamp descending (newest first)
         const sortedItems = allData.sort((a, b) => {
@@ -29,7 +40,9 @@ export async function GET() {
                 "Krisinformation.se": krisData.ok,
                 SMHI: smhiData.ok,
                 Polisen: polisenData.ok,
-                "Länsstyrelsen": lansstyrelsenData.ok
+                "Länsstyrelsen": lansstyrelsenData.ok,
+                "CERT-SE": certseData.ok,
+                "BankID": bankidData.ok
             }
         });
     } catch (error) {
