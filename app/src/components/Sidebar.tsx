@@ -17,6 +17,7 @@ import {
     FileText,
     Activity,
     ActivitySquare,
+    MessageSquareWarning,
     GraduationCap
 } from "lucide-react";
 
@@ -59,6 +60,12 @@ const routes = [
         icon: ActivitySquare,
         href: "/bia",
         color: "text-indigo-500",
+    },
+    {
+        label: "Kriskommunikation",
+        icon: MessageSquareWarning,
+        href: "/communication",
+        color: "text-fuchsia-500",
     },
     {
         label: "IT Policy",
