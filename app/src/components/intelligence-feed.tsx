@@ -89,12 +89,12 @@ export function IntelligenceFeed() {
     });
 
     return (
-        <div className="col-span-1 lg:col-span-2 bg-[#2a1142]/60 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent opacity-50 transition-opacity duration-500 pointer-events-none"></div>
+        <div className="col-span-1 lg:col-span-2 bg-[#2B4645]/80 border border-[#3AA3E0]/10 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#3AA3E0]/10 via-transparent to-transparent opacity-50 transition-opacity duration-500 pointer-events-none"></div>
             <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                     <h3 className="text-2xl font-semibold flex items-center text-white">
-                        <Activity className="w-6 h-6 mr-3 text-sky-400" />
+                        <Activity className="w-6 h-6 mr-3 text-[#3AA3E0]" />
                         Intelligence & Övervakning
                     </h3>
                     {!loading && (
@@ -143,7 +143,7 @@ export function IntelligenceFeed() {
                                         </div>
                                         <div className="flex items-center">
                                             {/* Live Indicator per source */}
-                                            <span className="text-xs bg-[#180a29] text-white px-2.5 py-1 rounded-full uppercase font-bold tracking-widest flex items-center shadow-inner mr-3 group-hover:bg-[#23103a] transition-colors border border-white/10">
+                                            <span className="text-xs bg-[#1A2F2D] text-white px-2.5 py-1 rounded-full uppercase font-bold tracking-widest flex items-center shadow-inner mr-3 group-hover:bg-[#2B4645] transition-colors border border-[#3AA3E0]/20">
                                                 <span className={`w-1.5 h-1.5 rounded-full mr-2 ${sourceStatus[source] !== false ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.8)] animate-pulse' : 'bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.8)]'}`}></span>
                                                 LIVE
                                             </span>
