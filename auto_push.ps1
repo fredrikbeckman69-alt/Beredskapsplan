@@ -13,5 +13,5 @@ while($true) {
     } catch {
         Write-Host "Error occurred during git push: $_"
     }
-    Start-Sleep -Seconds 15
+    Start-Sleep -Seconds 60
 }
