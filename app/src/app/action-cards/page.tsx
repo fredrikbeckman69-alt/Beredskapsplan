@@ -45,14 +45,14 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-blue-500",
         borderClass: "border-blue-500",
         tasks: [
-            { id: "1-1", title: "Kalla in Krisledningsgruppen", responsible: "VD", completed: false },
-            { id: "1-2", title: "Säkra larm och fysiskt skalskydd", responsible: "Beredskapsledare (Fysisk Miljö)", completed: false },
-            { id: "1-3", title: "Uppdatera personal om läget", responsible: "Affärsstöd/HR", completed: false },
-            { id: "1-4", title: "Initial skadebedömning", responsible: "Driftchef", completed: false },
-            { id: "1-5", title: "Säkra IT-miljö och data", responsible: "IT-ansvarig", completed: false },
-            { id: "1-6", title: "Kontakta berörda myndigheter vid behov", responsible: "VD / Beredskapsledare", completed: false },
-            { id: "1-7", title: "Informera styrelsen", responsible: "VD", completed: false },
-            { id: "1-8", title: "Upprätta kommunikationsplan (intern/extern)", responsible: "Kommunikationsansvarig", completed: false },
+            { id: "1-1", title: "Kalla in Krisledningsgruppen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "1-2", title: "Säkra larm och fysiskt skalskydd", responsible: "Beredskapsledare (Fysisk Miljö)", completed: false, scenarios: ["all", "power", "facility"] },
+            { id: "1-3", title: "Uppdatera personal om läget", responsible: "Affärsstöd/HR", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "1-4", title: "Initial skadebedömning", responsible: "Driftchef", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "1-5", title: "Säkra IT-miljö och data", responsible: "IT-ansvarig", completed: false, scenarios: ["all", "cyber", "power"] },
+            { id: "1-6", title: "Kontakta berörda myndigheter vid behov", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["all", "facility", "cyber"] },
+            { id: "1-7", title: "Informera styrelsen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "1-8", title: "Upprätta kommunikationsplan (intern/extern)", responsible: "Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
         ]
     },
     {
@@ -65,12 +65,12 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-amber-500",
         borderClass: "border-amber-500",
         tasks: [
-            { id: "2-1", title: "Hantera leverantörskommunikation", responsible: "Supply Chain", completed: false },
-            { id: "2-2", title: "Utvärdera behov av externt stöd (PR, juridik)", responsible: "VD / Kommunikationsansvarig", completed: false },
-            { id: "2-3", title: "Planera för skiftgång i krisledningen", responsible: "HR / Beredskapsledare", completed: false },
-            { id: "2-4", title: "Säkerställ likviditet och ekonomiska åtgärder", responsible: "CFO", completed: false },
-            { id: "2-5", title: "Informera nyckelkunder", responsible: "Försäljningschef", completed: false },
-            { id: "2-6", title: "Uppdatera skadebedömning och prognos", responsible: "Driftchef / Beredskapsledare", completed: false },
+            { id: "2-1", title: "Hantera leverantörskommunikation", responsible: "Supply Chain", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "2-2", title: "Utvärdera behov av externt stöd (PR, juridik)", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "cyber", "facility"] },
+            { id: "2-3", title: "Planera för skiftgång i krisledningen", responsible: "HR / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "2-4", title: "Säkerställ likviditet och ekonomiska åtgärder", responsible: "CFO", completed: false, scenarios: ["all", "cyber"] },
+            { id: "2-5", title: "Informera nyckelkunder", responsible: "Försäljningschef", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "2-6", title: "Uppdatera skadebedömning och prognos", responsible: "Driftchef / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
         ]
     },
     {
