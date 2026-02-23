@@ -4,10 +4,13 @@ import { useState } from "react";
 import { Lock, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 import { verifyPasscode } from "./actions";
 
+import { useRouter } from "next/navigation";
+
 export function LoginForm() {
     const [code, setCode] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,12 +18,16 @@ export function LoginForm() {
         setIsLoading(true);
 
         try {
-            const result = await verifyPasscode(code);
-            if (!result.success) {
-                setError(result.error || "Ogiltig kod");
+            // Simulate small delay for better UX
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            if (code === "68092659") {
+                localStorage.setItem("beredskapsplan_access", "68092659");
+                router.replace("/");
+            } else {
+                setError("Felaktig kod. Vänligen försök igen.");
                 setCode("");
             }
-            // If success, the server action redirects automatically
         } catch (err) {
             setError("Något gick fel. Försök igen.");
         } finally {
