@@ -31,13 +31,12 @@ export async function GET() {
                 Polisen: polisenData.ok,
                 Länsstyrelsen: lansstyrelsenData.ok
             }
-        }
         });
-} catch (error) {
-    console.error('Error in /api/intelligence route:', error);
-    return NextResponse.json(
-        { error: 'Failed to fetch intelligence data' },
-        { status: 500 }
-    );
-}
+    } catch (error) {
+        console.error('Error in /api/intelligence route:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch intelligence data' },
+            { status: 500 }
+        );
+    }
 }
