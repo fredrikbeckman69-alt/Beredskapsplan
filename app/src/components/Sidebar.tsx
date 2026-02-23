@@ -62,6 +62,12 @@ const routes = [
         color: "text-red-500",
     },
     {
+        label: "Övningar & Lärdomar",
+        icon: GraduationCap,
+        href: "/exercises",
+        color: "text-sky-500",
+    },
+    {
         label: "Inställningar",
         icon: Settings,
         href: "/settings",
