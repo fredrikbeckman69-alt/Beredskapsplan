@@ -14,9 +14,6 @@ export default function Dashboard() {
     <div className="p-4 md:p-8 space-y-8 w-full animate-in fade-in duration-700">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-          <div className="hidden md:flex relative w-16 h-16 opacity-80 shrink-0">
-            <Image src="/logo-rocc.png" alt="ROCC Logo" fill className="object-contain" priority />
-          </div>
           <div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white drop-shadow-sm mb-2">Beredskapsläge</h2>
             <p className="text-zinc-400 text-lg md:text-xl font-medium">Överblick av systemstatus och externa larm.</p>

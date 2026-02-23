@@ -16,25 +16,25 @@ import {
 
 const routes = [
     {
-        label: "Dashboard",
+        label: "Översiktsvy",
         icon: LayoutDashboard,
         href: "/",
         color: "text-sky-400",
     },
     {
-        label: "Action Cards",
+        label: "Åtgärdskort (Lathund)",
         icon: ListChecks,
         href: "/action-cards",
         color: "text-violet-400",
     },
     {
-        label: "Beredskap & Master",
+        label: "Kontakter & Resurser",
         icon: Users,
         href: "/master-data",
         color: "text-pink-400",
     },
     {
-        label: "Larm & Loggar",
+        label: "Händelselogg",
         icon: RadioTower,
         href: "/logs",
         color: "text-emerald-400",
@@ -82,11 +82,20 @@ export function Sidebar({ mobile }: SidebarProps) {
     return (
         <div className="space-y-4 py-6 flex flex-col h-full bg-transparent text-white">
             <div className="px-4 py-2 flex-1">
-                <Link href="/" className="flex items-center pl-2 mb-12 hover:scale-[1.02] transition-transform">
-                    <div className="relative h-14 w-48 flex items-center justify-start">
+                <Link href="/" className="flex items-center pl-2 mb-12 hover:scale-[1.02] transition-transform gap-3 w-full">
+                    <div className="relative h-14 w-28 flex shrink-0">
                         <Image
                             src="/logo.png"
                             alt="Skyddsprodukter Logo"
+                            fill
+                            className="object-contain object-left drop-shadow-lg"
+                            priority
+                        />
+                    </div>
+                    <div className="relative h-10 w-24 flex shrink-0 opacity-90">
+                        <Image
+                            src="/logo-rocc.png"
+                            alt="ROCC Logo"
                             fill
                             className="object-contain object-left drop-shadow-lg"
                             priority

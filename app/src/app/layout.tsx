@@ -6,8 +6,8 @@ import { Sidebar } from "@/components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Antigravity Beredskapsplan",
-  description: "Digital Business Continuity Plan for Antigravity",
+  title: "Beredskapsplan för [SysInf]",
+  description: "Digital Business Continuity Plan & Krisberedskap",
 };
 
 export default function RootLayout({
