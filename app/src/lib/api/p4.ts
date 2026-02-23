@@ -17,7 +17,7 @@ export async function fetchP4(): Promise<IntelligenceFetchResult> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const items: IntelligenceItem[] = messages.map((msg: any) => {
             // Priority: 1=Mycket allvarlig händelse, 2=Stor händelse, 3=Störning, 4=Information, 5=Trafikmeddelande
-            let severity: IntelligenceItem['severity'] = 'info';
+            let severity: IntelligenceItem['severity'] = 'low';
             if (msg.priority === 1) severity = 'high';
             else if (msg.priority === 2 || msg.priority === 3) severity = 'medium';
             else if (msg.priority === 4 || msg.priority === 5) severity = 'low';
