@@ -146,7 +146,7 @@ export default function ActionCardsPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
                 {phases.map((phase) => {
                     const isExpanded = expandedPhaseId === phase.id;
                     const filteredTasks = phase.tasks.filter(t => t.scenarios.includes(activeScenario));

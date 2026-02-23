@@ -182,7 +182,7 @@ export default function SMSKrisPage() {
                             <h4 className="text-lg font-medium text-white mb-4">
                                 {editingId ? 'Redigera Kontakt' : 'Ny Kontakt'}
                             </h4>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
                                 <div>
                                     <label className="block text-xs font-semibold text-zinc-400 mb-1 uppercase tracking-wider">Namn</label>
                                     <div className="relative">
