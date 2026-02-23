@@ -10,7 +10,7 @@ import { AuthWrapper } from "@/components/AuthWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Beredskapsplan för [SysInf]",
+  title: "Beredskapsplan Skyddsprodukter",
   description: "Digital Kontinuitetsplan & Krisberedskap",
 };
 
