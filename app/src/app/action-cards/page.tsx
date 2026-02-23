@@ -83,11 +83,11 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-rose-500",
         borderClass: "border-rose-500",
         tasks: [
-            { id: "3-1", title: "Planera för återgång till normalläge (Recovery)", responsible: "Beredskapsledare", completed: false },
-            { id: "3-2", title: "Genomför djupgående teknisk/operationell analys", responsible: "IT / Driftchef", completed: false },
-            { id: "3-3", title: "Utvärdera psykosocialt stöd för personal", responsible: "HR", completed: false },
-            { id: "3-4", title: "Sammanställ initial dokumentation och loggar", responsible: "Beredskapsledare", completed: false },
-            { id: "3-5", title: "Kommunicera långsiktig plan externt", responsible: "VD / Kommunikationsansvarig", completed: false },
+            { id: "3-1", title: "Planera för återgång till normalläge (Recovery)", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "3-2", title: "Genomför djupgående teknisk/operationell analys", responsible: "IT / Driftchef", completed: false, scenarios: ["all", "cyber", "power"] },
+            { id: "3-3", title: "Utvärdera psykosocialt stöd för personal", responsible: "HR", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "3-4", title: "Sammanställ initial dokumentation och loggar", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
+            { id: "3-5", title: "Kommunicera långsiktig plan externt", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility"] },
         ]
     }
 ];
