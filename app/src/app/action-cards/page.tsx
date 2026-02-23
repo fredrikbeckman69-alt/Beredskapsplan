@@ -132,8 +132,8 @@ export default function ActionCardsPage() {
                             key={scenario.id}
                             onClick={() => setActiveScenario(scenario.id)}
                             className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors border ${activeScenario === scenario.id
-                                    ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/50'
-                                    : 'bg-white/5 text-zinc-400 border-white/10 hover:bg-white/10 hover:text-zinc-200'
+                                ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/50'
+                                : 'bg-white/5 text-zinc-400 border-white/10 hover:bg-white/10 hover:text-zinc-200'
                                 }`}
                         >
                             {scenario.label}
@@ -256,7 +256,8 @@ export default function ActionCardsPage() {
                                                             </div>
                                                         </div>
                                                     </label>
-                                                ))}
+                                                ))
+                                            )}
                                         </div>
                                     </motion.div>
                                 )}
