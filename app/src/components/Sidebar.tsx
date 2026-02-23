@@ -18,6 +18,7 @@ import {
     Activity,
     ActivitySquare,
     MessageSquareWarning,
+    Building2,
     GraduationCap
 } from "lucide-react";
 
@@ -60,6 +61,12 @@ const routes = [
         icon: ActivitySquare,
         href: "/bia",
         color: "text-indigo-500",
+    },
+    {
+        label: "Fysisk Säkerhet & Lokaler",
+        icon: Building2,
+        href: "/facilities",
+        color: "text-amber-500",
     },
     {
         label: "Kriskommunikation",
