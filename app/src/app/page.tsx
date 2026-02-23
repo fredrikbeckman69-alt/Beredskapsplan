@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -12,9 +13,14 @@ export default function Dashboard() {
   return (
     <div className="p-4 md:p-8 space-y-8 w-full animate-in fade-in duration-700">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white drop-shadow-sm mb-2">Beredskapsläge</h2>
-          <p className="text-zinc-400 text-lg md:text-xl font-medium">Överblick av systemstatus och externa larm.</p>
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+          <div className="hidden md:flex relative w-16 h-16 opacity-80 shrink-0">
+            <Image src="/logo-rocc.png" alt="ROCC Logo" fill className="object-contain" priority />
+          </div>
+          <div>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white drop-shadow-sm mb-2">Beredskapsläge</h2>
+            <p className="text-zinc-400 text-lg md:text-xl font-medium">Överblick av systemstatus och externa larm.</p>
+          </div>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
           <div className="flex items-center px-5 py-2.5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20 backdrop-blur-md shadow-lg shadow-emerald-500/10">

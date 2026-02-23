@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -82,12 +83,15 @@ export function Sidebar({ mobile }: SidebarProps) {
         <div className="space-y-4 py-6 flex flex-col h-full bg-transparent text-white">
             <div className="px-4 py-2 flex-1">
                 <Link href="/" className="flex items-center pl-2 mb-12 hover:scale-[1.02] transition-transform">
-                    <div className="relative h-10 w-10 mr-4 rounded-2xl flex items-center justify-center bg-gradient-to-br from-red-500 to-orange-600 shadow-lg shadow-red-500/20">
-                        <ShieldAlert className="h-6 w-6 text-white drop-shadow-md" />
+                    <div className="relative h-14 w-48 flex items-center justify-start">
+                        <Image
+                            src="/logo.png"
+                            alt="Skyddsprodukter Logo"
+                            fill
+                            className="object-contain object-left drop-shadow-lg"
+                            priority
+                        />
                     </div>
-                    <h1 className="text-2xl font-semibold tracking-tight text-white drop-shadow-sm">
-                        Antigravity
-                    </h1>
                 </Link>
                 <div className="space-y-2">
                     {routes.map((route) => {
