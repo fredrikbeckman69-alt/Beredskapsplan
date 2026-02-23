@@ -17,7 +17,7 @@ export async function fetchKrisinformation(): Promise<IntelligenceFetchResult> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const items = entries.map((entry: any) => ({
             id: `msb-${entry.Identifier || Math.random().toString(36).substring(7)}`,
-            source: 'MCF',
+            source: 'Krisinformation.se',
             title: entry.Title || 'Viktigt meddelande',
             description: entry.Text || entry.Summary || '',
             category: 'Samhällsinformation',

@@ -26,7 +26,7 @@ export async function GET() {
         return NextResponse.json({
             items: sortedItems,
             status: {
-                MCF: krisData.ok,
+                "Krisinformation.se": krisData.ok,
                 SMHI: smhiData.ok,
                 Polisen: polisenData.ok,
                 "Länsstyrelsen": lansstyrelsenData.ok
