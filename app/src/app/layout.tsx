@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { VMABanner } from "@/components/VMABanner";
+import type { Viewport } from "next";
 
 import { AuthWrapper } from "@/components/AuthWrapper";
 
@@ -11,6 +12,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Beredskapsplan för [SysInf]",
   description: "Digital Business Continuity Plan & Krisberedskap",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -32,12 +39,12 @@ export default function RootLayout({
 
           <div className="relative z-10 flex h-screen w-full">
             {/* Glassmorphic Sidebar */}
-            <div className="hidden md:flex md:w-72 flex-col h-full border-r border-[#3AA3E0]/10 bg-[#2B4645]/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+            <div className="hidden md:flex shrink-0 md:w-72 flex-col h-full border-r border-[#3AA3E0]/10 bg-[#2B4645]/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
               <Sidebar />
             </div>
 
             {/* Main Content Area */}
-            <main className="flex-1 overflow-y-auto w-full h-full pb-20 md:pb-0">
+            <main className="flex-1 min-w-0 overflow-y-auto w-full h-full pb-20 md:pb-0">
               <div className="p-4 md:p-8 lg:p-12 max-w-7xl mx-auto h-full">
                 {children}
               </div>
