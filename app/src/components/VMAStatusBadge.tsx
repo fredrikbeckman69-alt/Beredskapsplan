@@ -41,15 +41,15 @@ export function VMAStatusBadge() {
                 }`}
             title={status === 'online' ? 'VMA Krisinformation API är anslutet och övervakas' : 'Kunde inte ansluta till VMA Krisinformation API'}
         >
-            <Radio className={`w-4 h-4 mr-2 ${status === 'online' ? 'animate-pulse text-emerald-400' : ''}`} />
-            <span className="text-xs font-semibold tracking-wide">
+            <Radio className={`w-5 h-5 mr-3 ${status === 'online' ? 'text-[#00E676]' : ''}`} />
+            <span className="text-sm font-bold tracking-wide mr-2">
                 VMA Länk: {status === 'online' ? 'Aktiv' : status === 'offline' ? 'Avbrott' : 'Kontrollerar...'}
             </span>
             {status === 'online' && (
-                <div className="ml-2 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></div>
+                <div className="ml-1 w-2.5 h-2.5 rounded-full bg-[#00E676] shadow-[0_0_12px_rgba(0,230,118,0.8)] animate-pulse"></div>
             )}
             {status === 'offline' && (
-                <div className="ml-2 w-2 h-2 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.8)]"></div>
+                <div className="ml-1 w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]"></div>
             )}
         </div>
     );

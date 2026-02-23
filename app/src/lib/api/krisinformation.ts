@@ -2,7 +2,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 
 export async function fetchKrisinformation(): Promise<IntelligenceFetchResult> {
     try {
-        const res = await fetch('https://api.krisinformation.se/v1/feed?format=json', {
+        const res = await fetch('https://api.krisinformation.se/v3/news?format=json', {
             next: { revalidate: 300 } // Cache for 5 minutes
         });
 
@@ -12,7 +12,7 @@ export async function fetchKrisinformation(): Promise<IntelligenceFetchResult> {
         }
 
         const data = await res.json();
-        const entries = data?.Entries || [];
+        const entries = Array.isArray(data) ? data : data?.Entries || [];
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const items = entries.map((entry: any) => ({
