@@ -5,6 +5,11 @@ import { IntelligenceItem } from '@/lib/api/types';
 import { Activity, Zap, CloudRain, ShieldAlert, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
 import Image from 'next/image';
 
+import smhiLogo from '../../public/logos/smhi.png';
+import polisenLogo from '../../public/logos/polisen.ico';
+import mcfLogo from '../../public/logos/mcf.png';
+import lansstyrelsenLogo from '../../public/logos/lansstyrelsen.png';
+
 export function IntelligenceFeed() {
     const [items, setItems] = useState<IntelligenceItem[]>([]);
     const [loading, setLoading] = useState(true);
@@ -57,10 +62,10 @@ export function IntelligenceFeed() {
     };
 
     const getIconForSource = (source: string) => {
-        if (source === 'SMHI') return <Image src="/logos/smhi.png" alt="SMHI" width={24} height={24} className="object-contain" />;
-        if (source === 'Polisen') return <Image src="/logos/polisen.ico" alt="Polisen" width={24} height={24} className="object-contain" />;
-        if (source === 'MCF') return <Image src="/logos/mcf.png" alt="MCF" width={24} height={24} className="object-contain rounded-sm" />;
-        if (source === 'Länsstyrelsen') return <Image src="/logos/lansstyrelsen.png" alt="Länsstyrelsen" width={24} height={24} className="object-contain" />;
+        if (source === 'SMHI') return <Image src={smhiLogo} alt="SMHI" width={24} height={24} className="object-contain" />;
+        if (source === 'Polisen') return <Image src={polisenLogo} alt="Polisen" width={24} height={24} className="object-contain" />;
+        if (source === 'MCF') return <Image src={mcfLogo} alt="MCF" width={24} height={24} className="object-contain rounded-sm" />;
+        if (source === 'Länsstyrelsen') return <Image src={lansstyrelsenLogo} alt="Länsstyrelsen" width={24} height={24} className="object-contain" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
 
