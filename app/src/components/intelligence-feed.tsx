@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { IntelligenceItem } from '@/lib/api/types';
 import { Activity, Zap, CloudRain, ShieldAlert, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
+import Image from 'next/image';
 
 export function IntelligenceFeed() {
     const [items, setItems] = useState<IntelligenceItem[]>([]);
@@ -56,10 +57,10 @@ export function IntelligenceFeed() {
     };
 
     const getIconForSource = (source: string) => {
-        if (source === 'SMHI') return <img src="/logos/smhi.png" alt="SMHI" className="w-6 h-6 object-contain" />;
-        if (source === 'Polisen') return <img src="/logos/polisen.ico" alt="Polisen" className="w-6 h-6 object-contain" />;
-        if (source === 'MCF') return <img src="/logos/mcf.png" alt="MCF" className="w-6 h-6 object-contain rounded-sm" />;
-        if (source === 'Länsstyrelsen') return <img src="/logos/lansstyrelsen.png" alt="Länsstyrelsen" className="w-6 h-6 object-contain" />;
+        if (source === 'SMHI') return <Image src="/logos/smhi.png" alt="SMHI" width={24} height={24} className="object-contain" />;
+        if (source === 'Polisen') return <Image src="/logos/polisen.ico" alt="Polisen" width={24} height={24} className="object-contain" />;
+        if (source === 'MCF') return <Image src="/logos/mcf.png" alt="MCF" width={24} height={24} className="object-contain rounded-sm" />;
+        if (source === 'Länsstyrelsen') return <Image src="/logos/lansstyrelsen.png" alt="Länsstyrelsen" width={24} height={24} className="object-contain" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
 
