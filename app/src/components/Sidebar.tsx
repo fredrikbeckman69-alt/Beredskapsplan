@@ -16,6 +16,7 @@ import {
     RadioTower,
     FileText,
     Activity,
+    ActivitySquare,
     GraduationCap
 } from "lucide-react";
 
@@ -52,6 +53,12 @@ const routes = [
         icon: Activity,
         href: "/rsa",
         color: "text-rose-500",
+    },
+    {
+        label: "Konsekvensanalys (BIA)",
+        icon: ActivitySquare,
+        href: "/bia",
+        color: "text-indigo-500",
     },
     {
         label: "IT Policy",
