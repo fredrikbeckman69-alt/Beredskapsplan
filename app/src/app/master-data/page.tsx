@@ -1,4 +1,4 @@
-import { Database, UserCheck, Network } from "lucide-react";
+import { Database, UserCheck, Network, Server } from "lucide-react";
 
 export default function MasterDataPage() {
     return (
