@@ -1,10 +1,8 @@
-import Image from "next/image";
+import { IntelligenceFeed } from "@/components/intelligence-feed";
+import { VMAStatusBadge } from "@/components/VMAStatusBadge";
 import {
   AlertTriangle,
   CheckCircle2,
-  Activity,
-  Zap,
-  CloudRain,
   Fuel,
   Users
 } from "lucide-react";
@@ -20,6 +18,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <VMAStatusBadge />
           <div className="flex items-center px-5 py-2.5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20 backdrop-blur-md shadow-lg shadow-emerald-500/10">
             <CheckCircle2 className="w-5 h-5 mr-2" />
             <span className="text-sm font-semibold tracking-wide">System Status: Normal</span>
@@ -33,65 +32,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Intelligence Card */}
-        <div className="col-span-1 lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-2xl overflow-hidden relative group">
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="relative z-10">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-semibold flex items-center text-white">
-                <Activity className="w-6 h-6 mr-3 text-sky-400" />
-                Intelligence & Övervakning
-              </h3>
-              <span className="text-xs bg-white/10 text-white px-3 py-1 rounded-full uppercase font-bold tracking-widest flex items-center">
-                <span className="w-2 h-2 rounded-full bg-red-500 mr-2 animate-pulse"></span>
-                Live
-              </span>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-start p-5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
-                <div className="flex items-center mb-2 sm:mb-0 sm:mr-4">
-                  <div className="p-3 bg-yellow-500/20 rounded-xl mr-4 sm:mr-0">
-                    <Zap className="w-6 h-6 text-yellow-400" />
-                  </div>
-                  <span className="text-xs text-zinc-400 sm:hidden ml-auto">12 min sen</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-white text-lg">Downdetector: Möjlig störning Telia</h4>
-                  <p className="text-zinc-400 mt-1 leading-relaxed">Ökad felrapportering senaste 15 minuterna. Påverkar mobilnät i södra Sverige.</p>
-                </div>
-                <span className="hidden sm:block text-xs text-zinc-500 font-medium ml-4 mt-1">12 min sen</span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-start p-5 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
-                <div className="flex items-center mb-2 sm:mb-0 sm:mr-4">
-                  <div className="p-3 bg-blue-500/20 rounded-xl mr-4 sm:mr-0">
-                    <CloudRain className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <span className="text-xs text-zinc-400 sm:hidden ml-auto">2 h sen</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-white text-lg">SMHI: Vädervarning Klass 2 (Gul)</h4>
-                  <p className="text-zinc-400 mt-1 leading-relaxed">Kraftigt snöfall väntas under natten. Följ utvecklingen.</p>
-                </div>
-                <span className="hidden sm:block text-xs text-zinc-500 font-medium ml-4 mt-1">2 h sen</span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-start p-5 bg-white/5 rounded-2xl border border-white/5 opacity-60">
-                <div className="flex items-center mb-2 sm:mb-0 sm:mr-4">
-                  <div className="p-3 bg-emerald-500/20 rounded-xl mr-4 sm:mr-0">
-                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-                  </div>
-                  <span className="text-xs text-zinc-400 sm:hidden ml-auto">Idag</span>
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-zinc-300 text-lg">Trafikverket: Inga större störningar</h4>
-                  <p className="text-zinc-500 mt-1 leading-relaxed">Normal framkomlighet på Europa/Riksvägar runt anläggningen.</p>
-                </div>
-                <span className="hidden sm:block text-xs text-zinc-600 font-medium ml-4 mt-1">Idag</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <IntelligenceFeed />
 
         {/* Resources & Setup */}
         <div className="space-y-6">

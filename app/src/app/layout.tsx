@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
+import { VMABanner } from "@/components/VMABanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="sv" className="dark">
       <body className={`${inter.className} bg-black text-white antialiased min-h-screen relative overflow-hidden selection:bg-white/30`}>
+        <VMABanner />
         {/* Background glowing orbs */}
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[100px] opacity-30 bg-purple-600 animate-blob"></div>

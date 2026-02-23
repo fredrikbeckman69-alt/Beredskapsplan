@@ -1,4 +1,4 @@
-import { Database, UserCheck, Phone, Cpu } from "lucide-react";
+import { Database, UserCheck } from "lucide-react";
 
 export default function MasterDataPage() {
     return (
@@ -21,64 +21,64 @@ export default function MasterDataPage() {
                             Lägg till roll
                         </button>
                     </div>
-                    <div className="p-0">
+                    <div className="overflow-x-auto w-full">
                         <table className="w-full text-sm text-left">
                             <thead className="text-xs text-zinc-500 uppercase bg-black/40 border-b border-[#222]">
                                 <tr>
-                                    <th className="px-6 py-3 font-medium">Roll</th>
-                                    <th className="px-6 py-3 font-medium">Ordinarie</th>
-                                    <th className="px-6 py-3 font-medium">Reserv</th>
-                                    <th className="px-6 py-3 font-medium text-right">Åtgärd</th>
+                                    <th className="pl-6 pr-3 py-3 font-medium">Roll</th>
+                                    <th className="px-3 py-3 font-medium">Ordinarie</th>
+                                    <th className="px-3 py-3 font-medium">Reserv</th>
+                                    <th className="pl-3 pr-6 py-3 font-medium text-right">Åtgärd</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">VD</td>
-                                    <td className="px-6 py-4 text-zinc-300">Tore Robertsson</td>
-                                    <td className="px-6 py-4 text-zinc-500">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">VD</td>
+                                    <td className="px-3 py-4 text-zinc-300">Tore Robertsson</td>
+                                    <td className="px-3 py-4 text-zinc-500">Fredrik Beckman</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Beredskapsledare</td>
-                                    <td className="px-6 py-4 text-zinc-300">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-zinc-500">Robert Trupp</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Beredskapsledare</td>
+                                    <td className="px-3 py-4 text-zinc-300">Fredrik Beckman</td>
+                                    <td className="px-3 py-4 text-zinc-500">Robert Trupp</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Logistikansvarig</td>
-                                    <td className="px-6 py-4 text-zinc-300">Avdullah Veseli</td>
-                                    <td className="px-6 py-4 text-zinc-500">Alexander Lavrov</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Logistikansvarig</td>
+                                    <td className="px-3 py-4 text-zinc-300">Avdullah Veseli</td>
+                                    <td className="px-3 py-4 text-zinc-500">Alexander Lavrov</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Personalchef</td>
-                                    <td className="px-6 py-4 text-zinc-300">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-zinc-500">Tore Robertsson</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Personalchef</td>
+                                    <td className="px-3 py-4 text-zinc-300">Fredrik Beckman</td>
+                                    <td className="px-3 py-4 text-zinc-500">Tore Robertsson</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Kommunikationschef</td>
-                                    <td className="px-6 py-4 text-zinc-300">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-zinc-500">Robert Trupp</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Kommunikationschef</td>
+                                    <td className="px-3 py-4 text-zinc-300">Fredrik Beckman</td>
+                                    <td className="px-3 py-4 text-zinc-500">Robert Trupp</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">IT-ansvarig</td>
-                                    <td className="px-6 py-4 text-zinc-300">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-zinc-500">Lina Gustavsson</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">IT-ansvarig</td>
+                                    <td className="px-3 py-4 text-zinc-300">Fredrik Beckman</td>
+                                    <td className="px-3 py-4 text-zinc-500">Lina Gustavsson</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Ekonomi</td>
-                                    <td className="px-6 py-4 text-zinc-300">Eva Nilsson</td>
-                                    <td className="px-6 py-4 text-zinc-500">BDO (Extern part)</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Ekonomi</td>
+                                    <td className="px-3 py-4 text-zinc-300">Eva Nilsson</td>
+                                    <td className="px-3 py-4 text-zinc-500">BDO (Extern part)</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                                 <tr className="hover:bg-white/5">
-                                    <td className="px-6 py-4 font-medium text-white">Säkerhetschef</td>
-                                    <td className="px-6 py-4 text-zinc-300">Robert Trupp</td>
-                                    <td className="px-6 py-4 text-zinc-500">Fredrik Beckman</td>
-                                    <td className="px-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
+                                    <td className="pl-6 pr-3 py-4 font-medium text-white">Säkerhetschef</td>
+                                    <td className="px-3 py-4 text-zinc-300">Robert Trupp</td>
+                                    <td className="px-3 py-4 text-zinc-500">Fredrik Beckman</td>
+                                    <td className="pl-3 pr-6 py-4 text-right"><span className="text-sky-500 hover:text-sky-400 cursor-pointer">Redigera</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -119,3 +119,5 @@ export default function MasterDataPage() {
         </div>
     );
 }
+
+

@@ -11,7 +11,8 @@ import {
     Users,
     Settings,
     LogOut,
-    RadioTower
+    RadioTower,
+    FileText
 } from "lucide-react";
 
 const routes = [
@@ -38,6 +39,18 @@ const routes = [
         icon: RadioTower,
         href: "/logs",
         color: "text-emerald-400",
+    },
+    {
+        label: "IT Policy",
+        icon: FileText,
+        href: "/it-policy",
+        color: "text-sky-400",
+    },
+    {
+        label: "Beredskap SMS",
+        icon: ShieldAlert,
+        href: "/sms-kris",
+        color: "text-red-500",
     },
     {
         label: "Inställningar",
