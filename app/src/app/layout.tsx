@@ -20,19 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sv" className="dark">
-      <body className={`${inter.className} bg-[#0c0514] text-white antialiased min-h-screen relative overflow-hidden selection:bg-white/30`}>
+      <body className={`${inter.className} bg-[#1A2F2D] text-white antialiased min-h-screen relative overflow-hidden selection:bg-[#3AA3E0]/30`}>
         <AuthWrapper>
           <VMABanner />
           {/* Background glowing orbs */}
           <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[120px] opacity-40 bg-[#3a0a6a] animate-blob"></div>
-            <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[100px] opacity-30 bg-[#004bb5] animate-blob animation-delay-2000"></div>
-            <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[150px] opacity-30 bg-[#700b65] animate-blob animation-delay-4000"></div>
+            <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full mix-blend-screen filter blur-[120px] opacity-20 bg-[#FD823D] animate-blob"></div>
+            <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full mix-blend-screen filter blur-[100px] opacity-20 bg-[#027DC2] animate-blob animation-delay-2000"></div>
+            <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] rounded-full mix-blend-screen filter blur-[150px] opacity-20 bg-[#3AA3E0] animate-blob animation-delay-4000"></div>
           </div>
 
           <div className="relative z-10 flex h-screen w-full">
             {/* Glassmorphic Sidebar */}
-            <div className="hidden md:flex md:w-72 flex-col h-full border-r border-white/5 bg-[#140624]/60 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+            <div className="hidden md:flex md:w-72 flex-col h-full border-r border-[#3AA3E0]/10 bg-[#2B4645]/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
               <Sidebar />
             </div>
 

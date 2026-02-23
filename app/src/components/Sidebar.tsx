@@ -22,19 +22,19 @@ const routes = [
         label: "Översiktsvy",
         icon: LayoutDashboard,
         href: "/",
-        color: "text-sky-400",
+        color: "text-[#3AA3E0]",
     },
     {
         label: "Åtgärdskort (Lathund)",
         icon: ListChecks,
         href: "/action-cards",
-        color: "text-violet-400",
+        color: "text-[#FD823D]",
     },
     {
         label: "Kontakter & Resurser",
         icon: Users,
         href: "/master-data",
-        color: "text-pink-400",
+        color: "text-[#3AA3E0]",
     },
     {
         label: "Händelselogg",
@@ -46,7 +46,7 @@ const routes = [
         label: "IT Policy",
         icon: FileText,
         href: "/it-policy",
-        color: "text-sky-400",
+        color: "text-[#3AA3E0]",
     },
     {
         label: "Beredskap SMS",
@@ -128,7 +128,7 @@ export function Sidebar({ mobile }: SidebarProps) {
                                     "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer rounded-2xl transition-all duration-300",
                                     isActive
                                         ? "bg-white/10 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
-                                        : "text-zinc-400 hover:text-white hover:bg-white/5"
+                                        : "text-zinc-400 hover:text-white hover:bg-[#3AA3E0]/10"
                                 )}
                             >
                                 <div className="flex items-center flex-1">

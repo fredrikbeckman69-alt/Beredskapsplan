@@ -36,11 +36,11 @@ export default function Dashboard() {
 
         {/* Resources & Setup */}
         <div className="space-y-6">
-          <div className="bg-[#2a1142]/60 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative group overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-bl from-orange-500/10 via-transparent to-transparent opacity-50 transition-opacity duration-500"></div>
+          <div className="bg-[#2B4645]/80 border border-[#3AA3E0]/10 rounded-3xl p-6 md:p-8 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative group overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-bl from-[#FD823D]/10 via-transparent to-transparent opacity-50 transition-opacity duration-500"></div>
             <div className="relative z-10">
               <h3 className="text-xl font-semibold mb-6 flex items-center text-white">
-                <Fuel className="w-6 h-6 mr-3 text-orange-400" />
+                <Fuel className="w-6 h-6 mr-3 text-[#FD823D]" />
                 Uthållighet
               </h3>
               <div className="space-y-6">
@@ -66,17 +66,17 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-[#2a1142]/60 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative group overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/10 via-transparent to-transparent opacity-50 transition-opacity duration-500"></div>
+          <div className="bg-[#2B4645]/80 border border-[#3AA3E0]/10 rounded-3xl p-6 md:p-8 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative group overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#3AA3E0]/10 via-transparent to-transparent opacity-50 transition-opacity duration-500"></div>
             <div className="relative z-10">
               <h3 className="text-xl font-semibold mb-6 flex items-center text-white">
-                <Users className="w-6 h-6 mr-3 text-violet-400" />
+                <Users className="w-6 h-6 mr-3 text-[#3AA3E0]" />
                 Krisledning (Jour)
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-black/20 rounded-2xl border border-white/5">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-indigo-700 text-white flex items-center justify-center font-bold text-sm mr-4 shadow-lg border border-white/10">TR</div>
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3AA3E0] to-[#027DC2] text-white flex items-center justify-center font-bold text-sm mr-4 shadow-lg border border-white/10">TR</div>
                     <div>
                       <p className="font-semibold text-white">Tore Robertsson</p>
                       <p className="text-sm text-zinc-400">VD / Högsta ansvar</p>
@@ -86,7 +86,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center justify-between p-3 bg-black/20 rounded-2xl border border-white/5">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-[#180a29] text-zinc-300 flex items-center justify-center font-bold text-sm mr-4 border border-white/10">FB</div>
+                    <div className="w-10 h-10 rounded-full bg-[#1A2F2D] text-zinc-300 flex items-center justify-center font-bold text-sm mr-4 border border-[#3AA3E0]/20">FB</div>
                     <div>
                       <p className="font-semibold text-white">Fredrik Beckman</p>
                       <p className="text-sm text-zinc-400">Beredskapsledare</p>
