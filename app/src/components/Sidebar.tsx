@@ -15,7 +15,8 @@ import {
     LogOut,
     RadioTower,
     FileText,
-    Activity
+    Activity,
+    GraduationCap
 } from "lucide-react";
 
 const routes = [
