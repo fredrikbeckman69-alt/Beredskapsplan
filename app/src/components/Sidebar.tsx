@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import logoSrc from "../../../public/logo.png";
+import logoRoccSrc from "../../../public/logo-rocc.png";
 import {
     ShieldAlert,
     LayoutDashboard,
@@ -98,7 +100,7 @@ export function Sidebar({ mobile }: SidebarProps) {
                 <Link href="/" className="flex items-center pl-2 mb-12 hover:scale-[1.02] transition-transform gap-3 w-full">
                     <div className="relative h-14 w-28 flex shrink-0">
                         <Image
-                            src="/logo.png"
+                            src={logoSrc}
                             alt="Skyddsprodukter Logo"
                             fill
                             className="object-contain object-left drop-shadow-lg"
@@ -107,7 +109,7 @@ export function Sidebar({ mobile }: SidebarProps) {
                     </div>
                     <div className="relative h-10 w-24 flex shrink-0 opacity-90">
                         <Image
-                            src="/logo-rocc.png"
+                            src={logoRoccSrc}
                             alt="ROCC Logo"
                             fill
                             className="object-contain object-left drop-shadow-lg"

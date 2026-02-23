@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { LoginForm } from "./login-form";
+import logoSrc from "../../../../public/logo.png";
+import logoRoccSrc from "../../../../public/logo-rocc.png";
 
 export default function LoginPage() {
     return (
@@ -20,7 +22,7 @@ export default function LoginPage() {
                         <div className="flex items-center justify-center gap-6 mb-10 w-full px-4">
                             <div className="relative w-32 h-16 flex items-center justify-center drop-shadow-lg">
                                 <Image
-                                    src="/logo.png"
+                                    src={logoSrc}
                                     alt="Skyddsprodukter Logo"
                                     fill
                                     className="object-contain"
@@ -30,7 +32,7 @@ export default function LoginPage() {
                             <div className="h-10 w-px bg-white/20"></div>
                             <div className="relative w-32 h-16 flex items-center justify-center drop-shadow-lg">
                                 <Image
-                                    src="/logo-rocc.png"
+                                    src={logoRoccSrc}
                                     alt="ROCC Group Logo"
                                     fill
                                     className="object-contain"
