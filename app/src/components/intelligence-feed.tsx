@@ -79,7 +79,12 @@ export function IntelligenceFeed() {
         return acc;
     }, {} as Record<string, IntelligenceItem[]>);
 
-    const sources = ['MCF', 'Polisen', 'SMHI'];
+    const baseSources = ['MCF', 'Polisen', 'SMHI'];
+    const sources = [...baseSources].sort((a, b) => {
+        const timeA = groupedItems[a]?.length ? new Date(groupedItems[a][0].timestamp).getTime() : 0;
+        const timeB = groupedItems[b]?.length ? new Date(groupedItems[b][0].timestamp).getTime() : 0;
+        return timeB - timeA;
+    });
 
     return (
         <div className="col-span-1 lg:col-span-2 bg-[#2a1142]/60 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden relative group">
