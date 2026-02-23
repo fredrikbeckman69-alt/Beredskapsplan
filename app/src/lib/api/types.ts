@@ -2,7 +2,7 @@ export type SeverityLevel = 'low' | 'medium' | 'high' | 'critical';
 
 export interface IntelligenceItem {
     id: string;
-    source: 'MCF' | 'SMHI' | 'Polisen';
+    source: 'MCF' | 'SMHI' | 'Polisen' | 'Länsstyrelsen';
     title: string;
     description: string;
     category: string;
