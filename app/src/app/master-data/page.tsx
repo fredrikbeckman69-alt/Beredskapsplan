@@ -86,33 +86,68 @@ export default function MasterDataPage() {
                 </div>
 
                 {/* Resurser */}
-                <div className="bg-[#111] border border-[#222] rounded-xl overflow-hidden flex flex-col">
-                    <div className="border-b border-[#222] bg-[#151515] px-6 py-4 flex items-center justify-between shrink-0">
-                        <h3 className="font-semibold flex items-center text-lg">
-                            <Database className="w-5 h-5 mr-3 text-orange-500" />
-                            Kritiska Resurser
-                        </h3>
-                        <button className="text-sm bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded transition">
-                            Uppdatera
-                        </button>
-                    </div>
-                    <div className="p-6 space-y-4 flex-1">
-                        <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
-                            <div className="flex flex-col">
-                                <span className="font-medium text-white">Diesel för reservkraft</span>
-                                <span className="text-xs text-zinc-500">Målsättning: 500 Liter</span>
-                            </div>
-                            <span className="text-emerald-500 font-bold">450 L</span>
-                        </div>
+                <div className="bg-[#111] border border-[#222] rounded-xl overflow-hidden flex flex-col space-y-4">
 
-                        <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
-                            <div className="flex flex-col">
-                                <span className="font-medium text-white">Gasoltuber (Värme)</span>
-                                <span className="text-xs text-zinc-500">Målsättning: 10 st P11</span>
+                    {/* Fysiska Resurser */}
+                    <div className="flex-1">
+                        <div className="border-b border-[#222] bg-[#151515] px-6 py-4 flex items-center justify-between shrink-0">
+                            <h3 className="font-semibold flex items-center text-lg">
+                                <Database className="w-5 h-5 mr-3 text-orange-500" />
+                                Fysiska Resurser
+                            </h3>
+                            <button className="text-sm bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded transition">
+                                Uppdatera
+                            </button>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
+                                <div className="flex flex-col">
+                                    <span className="font-medium text-white">Diesel för reservkraft</span>
+                                    <span className="text-xs text-zinc-500">Målsättning: 500 Liter</span>
+                                </div>
+                                <span className="text-emerald-500 font-bold">450 L</span>
                             </div>
-                            <span className="text-emerald-500 font-bold">8 st</span>
+
+                            <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
+                                <div className="flex flex-col">
+                                    <span className="font-medium text-white">Gasoltuber (Värme)</span>
+                                    <span className="text-xs text-zinc-500">Målsättning: 10 st P11</span>
+                                </div>
+                                <span className="text-emerald-500 font-bold">8 st</span>
+                            </div>
                         </div>
                     </div>
+
+                    {/* IT/Kommunikation Resurser */}
+                    <div className="flex-1 border-t border-[#222]">
+                        <div className="border-b border-[#222] bg-[#151515] px-6 py-4 flex items-center justify-between shrink-0">
+                            <h3 className="font-semibold flex items-center text-lg">
+                                <Server className="w-5 h-5 mr-3 text-cyan-500" />
+                                IT & Kommunikation
+                            </h3>
+                            <button className="text-sm bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded transition">
+                                Redigera
+                            </button>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
+                                <div className="flex flex-col">
+                                    <span className="font-medium text-white">Nödkommunikation (Rakel/Satellit)</span>
+                                    <span className="text-xs text-zinc-500">Plats: Säkerhetsskåp VD-kontor</span>
+                                </div>
+                                <span className="text-emerald-500 font-bold">Laddad & Testad</span>
+                            </div>
+
+                            <div className="flex justify-between items-center p-3 bg-black/40 rounded border border-[#222]">
+                                <div className="flex flex-col">
+                                    <span className="font-medium text-white">Offline Backups (Air-gapped)</span>
+                                    <span className="text-xs text-zinc-500">Rutin: Veckovis bandbackup</span>
+                                </div>
+                                <span className="text-zinc-300 font-bold">Senast: Igår 23:00</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 {/* Kritiska Beroenden */}
