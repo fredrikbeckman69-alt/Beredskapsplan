@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Lock, ArrowRight, Loader2, AlertCircle } from "lucide-react";
-import { verifyPasscode } from "./actions";
 
 import { useRouter } from "next/navigation";
 
