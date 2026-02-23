@@ -59,6 +59,13 @@ const routes = [
         isCritical: true,
     },
     {
+        label: "Sveriges Radio P4",
+        icon: Radio,
+        href: "/p4",
+        color: "text-purple-400",
+        isCritical: true,
+    },
+    {
         label: "Risk & Sårbarhet (RSA)",
         icon: Activity,
         href: "/rsa",
@@ -100,13 +107,6 @@ const routes = [
         href: "/settings",
         color: "text-zinc-400",
     },
-    {
-        label: "Sveriges Radio P4",
-        icon: Radio,
-        href: "/p4",
-        color: "text-purple-400",
-        isCritical: true,
-    },
 ];
 
 interface SidebarProps {
@@ -118,7 +118,7 @@ export function Sidebar({ mobile }: SidebarProps) {
 
     if (mobile) {
         return (
-            <div className="flex justify-around items-center w-full px-2 py-3">
+            <div className="flex overflow-x-auto overflow-y-hidden hide-scrollbar flex-nowrap gap-2 px-4 py-3 items-center w-full touch-pan-x">
                 {routes.map((route) => {
                     const isActive = pathname === route.href;
                     return (
@@ -126,7 +126,7 @@ export function Sidebar({ mobile }: SidebarProps) {
                             key={route.href}
                             href={route.href}
                             className={cn(
-                                "flex flex-col items-center justify-center w-16 h-14 rounded-2xl transition-all duration-300 relative overflow-hidden",
+                                "flex flex-col shrink-0 items-center justify-center w-16 h-14 rounded-2xl transition-all duration-300 relative overflow-hidden",
                                 isActive
                                     ? (route.isCritical ? "bg-rose-500/20 scale-105 shadow-[inset_0_1px_1px_rgba(244,63,94,0.3)] ring-1 ring-inset ring-rose-500/30" : "bg-white/10 scale-105")
                                     : (route.isCritical ? "bg-rose-500/10 hover:bg-rose-500/20 ring-1 ring-inset ring-rose-500/20" : "hover:bg-white/5")
