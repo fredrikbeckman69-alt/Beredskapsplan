@@ -56,18 +56,18 @@ export function IntelligenceFeed() {
     };
 
     const getIconForSource = (source: string) => {
-        if (source === 'SMHI') return <CloudRain className="w-5 h-5 text-blue-400" />;
-        if (source === 'Polisen') return <ShieldAlert className="w-5 h-5 text-blue-500" />;
-        if (source === 'MCF') return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-        if (source === 'Länsstyrelsen') return <Landmark className="w-5 h-5 text-emerald-400" />;
+        if (source === 'SMHI') return <img src="/logos/smhi.png" alt="SMHI" className="w-6 h-6 object-contain" />;
+        if (source === 'Polisen') return <img src="/logos/polisen.ico" alt="Polisen" className="w-6 h-6 object-contain" />;
+        if (source === 'MCF') return <img src="/logos/mcf.png" alt="MCF" className="w-6 h-6 object-contain rounded-sm" />;
+        if (source === 'Länsstyrelsen') return <img src="/logos/lansstyrelsen.png" alt="Länsstyrelsen" className="w-6 h-6 object-contain" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
 
     const getBgColorForSource = (source: string) => {
-        if (source === 'SMHI') return 'bg-blue-500/20 text-blue-400';
-        if (source === 'Polisen') return 'bg-blue-600/20 text-blue-500';
-        if (source === 'MCF') return 'bg-yellow-500/20 text-yellow-500';
-        if (source === 'Länsstyrelsen') return 'bg-emerald-500/20 text-emerald-400';
+        if (source === 'SMHI') return 'bg-white/10';
+        if (source === 'Polisen') return 'bg-white/10';
+        if (source === 'MCF') return 'bg-white/10';
+        if (source === 'Länsstyrelsen') return 'bg-white/10';
         return 'bg-yellow-500/20 text-yellow-400';
     };
 
