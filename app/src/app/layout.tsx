@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Beredskapsplan för [SysInf]",
-  description: "Digital Business Continuity Plan & Krisberedskap",
+  description: "Digital Kontinuitetsplan & Krisberedskap",
 };
 
 export const viewport: Viewport = {

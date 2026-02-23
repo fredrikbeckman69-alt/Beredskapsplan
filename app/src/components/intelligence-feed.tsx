@@ -101,7 +101,7 @@ export function IntelligenceFeed() {
                 <div className="flex items-center justify-between mb-8">
                     <h3 className="text-2xl font-semibold flex items-center text-white">
                         <Activity className="w-6 h-6 mr-3 text-[#3AA3E0]" />
-                        Intelligence & Övervakning
+                        Underrättelser & Övervakning
                     </h3>
                     {!loading && (
                         <div className="text-sm text-zinc-400 font-medium bg-white/5 px-4 py-2 rounded-full border border-white/5">

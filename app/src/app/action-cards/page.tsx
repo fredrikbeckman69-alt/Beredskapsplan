@@ -10,6 +10,7 @@ type Task = {
     title: string;
     responsible: string;
     completed: boolean;
+    scenarios: string[]; // Added scenario filtering
 };
 
 type Phase = {
@@ -23,6 +24,14 @@ type Phase = {
     borderClass: string;
     tasks: Task[];
 };
+
+// Available Scenarios
+const scenariosList = [
+    { id: "all", label: "Generellt Krisläge" },
+    { id: "power", label: "Långvarigt Strömavbrott" },
+    { id: "cyber", label: "IT-haveri / Ransomware" },
+    { id: "facility", label: "Skalskydd Hotat / Inbrott" },
+];
 
 // Complete data for all phases
 const initialPhases: Phase[] = [
@@ -108,7 +117,7 @@ export default function ActionCardsPage() {
             <div className="flex flex-col mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3 flex items-center">
                     <ListChecks className="w-8 h-8 text-blue-500 mr-4" />
-                    Action Cards
+                    Åtgärdskort
                 </h2>
                 <p className="text-zinc-400 text-lg max-w-2xl">
                     Tidsbaserade checklistor (0-6h, 6-24h, 24-72h) för krisledningen.
