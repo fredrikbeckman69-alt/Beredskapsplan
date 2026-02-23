@@ -2,7 +2,7 @@ import { Database, UserCheck, Network, Server } from "lucide-react";
 
 export default function MasterDataPage() {
     return (
-        <div className="p-8 space-y-8 w-full max-w-6xl">
+        <div className="p-4 md:p-8 space-y-8 w-full max-w-6xl mx-auto">
             <div>
                 <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Beredskap & Master Data</h2>
                 <p className="text-zinc-400">Hantera krisorganisation, resursregister och larmmottagare.</p>

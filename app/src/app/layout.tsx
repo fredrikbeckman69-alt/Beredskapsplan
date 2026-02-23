@@ -51,7 +51,7 @@ export default function RootLayout({
             </main>
 
             {/* Mobile Bottom Navigation (Sidebar rendered here on small screens) */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50  border-t border-white/10 bg-black/60 backdrop-blur-xl pb-safe">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50  border-t border-white/10 bg-black/60 backdrop-blur-xl pb-[env(safe-area-inset-bottom)]">
               <Sidebar mobile />
             </div>
           </div>
