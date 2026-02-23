@@ -32,9 +32,23 @@ export function VMABanner() {
                 const res = await fetch('https://api.krisinformation.se/v3/vmas');
                 if (res.ok) {
                     const data = await res.json();
-                    // Filter out explicitly tests unless we intentionally want to show them
-                    // Usually we want to show anything the API returns as active
-                    setVmas(data);
+
+                    // Filter out tests. SR api uses msgType, KrisInfo provides a 'Type' and also has 'Exercise' or 'Test' patterns. 
+                    // Let's filter out anything that has "test" in the Headline/Description (case insensitive) just to be safe,
+                    // or where the payload explicitly marks it as not an actual warning.
+                    const realVmas = data.filter((vma: VMAAlert) => {
+                        const isTestHeadline = vma.Headline.toLowerCase().includes('test');
+                        const isTestDescription = vma.Description.toLowerCase().includes('test');
+
+                        // If it's explicitly a test according to text, ignore it
+                        if (isTestHeadline || isTestDescription) {
+                            return false;
+                        }
+
+                        return true;
+                    });
+
+                    setVmas(realVmas);
                 }
             } catch (error) {
                 console.error("Failed to fetch VMAs:", error);
