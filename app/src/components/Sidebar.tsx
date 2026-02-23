@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import logoSrc from "../../../public/logo.png";
-import logoRoccSrc from "../../../public/logo-rocc.png";
+import logoSrc from "../../public/logo.png";
+import logoRoccSrc from "../../public/logo-rocc.png";
 import {
     ShieldAlert,
     LayoutDashboard,

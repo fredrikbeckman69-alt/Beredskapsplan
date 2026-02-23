@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { LoginForm } from "./login-form";
-import logoSrc from "../../../../public/logo.png";
-import logoRoccSrc from "../../../../public/logo-rocc.png";
+import logoSrc from "../../../public/logo.png";
+import logoRoccSrc from "../../../public/logo-rocc.png";
 
 export default function LoginPage() {
     return (
