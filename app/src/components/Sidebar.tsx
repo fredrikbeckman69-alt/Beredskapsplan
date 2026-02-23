@@ -144,9 +144,9 @@ export function Sidebar({ mobile }: SidebarProps) {
     }
 
     return (
-        <div className="space-y-4 py-6 flex flex-col h-full bg-transparent text-white">
-            <div className="px-4 py-2 flex-1">
-                <Link href="/" className="flex items-center pl-2 mb-12 hover:scale-[1.02] transition-transform gap-3 w-full">
+        <div className="py-6 flex flex-col h-full bg-transparent text-white">
+            <div className="px-4 py-2 flex-1 flex flex-col min-h-0">
+                <Link href="/" className="flex items-center pl-2 mb-6 shrink-0 hover:scale-[1.02] transition-transform gap-3 w-full">
                     <div className="relative h-14 w-28 flex shrink-0">
                         <Image
                             src={logoSrc}
@@ -166,7 +166,7 @@ export function Sidebar({ mobile }: SidebarProps) {
                         />
                     </div>
                 </Link>
-                <div className="space-y-2">
+                <div className="space-y-2 flex-1 overflow-y-auto pr-2 pb-2 -mr-2">
                     {routes.map((route) => {
                         const isActive = pathname === route.href;
                         return (
