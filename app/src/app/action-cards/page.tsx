@@ -129,8 +129,8 @@ export default function ActionCardsPage() {
                             key={phase.id}
                             layout
                             className={`flex flex-col rounded-2xl border transition-all duration-300 overflow-hidden ${isExpanded
-                                    ? 'bg-[#111] border-zinc-700 shadow-xl shadow-black ring-1 ring-white/5'
-                                    : 'bg-[#111] border-zinc-800/80 hover:bg-[#151515] hover:border-zinc-700 cursor-pointer opacity-80 hover:opacity-100'
+                                ? 'bg-[#111] border-zinc-700 shadow-xl shadow-black ring-1 ring-white/5'
+                                : 'bg-[#111] border-zinc-800/80 hover:bg-[#151515] hover:border-zinc-700 cursor-pointer opacity-80 hover:opacity-100'
                                 }`}
                             onClick={() => !isExpanded && setExpandedPhaseId(phase.id)}
                         >
@@ -139,13 +139,10 @@ export default function ActionCardsPage() {
                                 {/* Background glow effect */}
                                 <div className={`absolute -top-32 -right-32 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none transition-opacity duration-500 ${isExpanded ? phase.solidBgClass : 'opacity-0'}`} />
 
-                                <div className={`absolute top-6 right-6 transition-transform duration-500 pointer-events-none ${isExpanded ? phase.colorClass + ' opacity-20' : 'text-zinc-600 opacity-10 group-hover:scale-110'}`}>
-                                    <PhaseIcon className="w-20 h-20" />
-                                </div>
-
                                 <div className="relative z-10 w-full">
                                     <div className="flex items-center justify-between mb-4">
                                         <h3 className={`text-2xl font-bold flex items-center ${isExpanded ? phase.colorClass : 'text-zinc-300'}`}>
+                                            <PhaseIcon className={`w-7 h-7 mr-3 drop-shadow-sm transition-colors ${isExpanded ? phase.colorClass : 'text-zinc-500'}`} />
                                             <span className={`${isExpanded ? phase.bgClass : 'bg-black'} ${isExpanded ? phase.colorClass : 'text-zinc-500 border border-white/5'} px-2.5 py-1 rounded-md text-sm font-semibold mr-3 tracking-wide uppercase`}>
                                                 {phase.title}
                                             </span>
@@ -197,8 +194,8 @@ export default function ActionCardsPage() {
                                                 <label
                                                     key={task.id}
                                                     className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${task.completed
-                                                            ? 'bg-black/30 border-white/5 hover:bg-black/40'
-                                                            : 'bg-black/50 border-white/10 hover:border-white/20 hover:bg-black/60 shadow-sm'
+                                                        ? 'bg-black/30 border-white/5 hover:bg-black/40'
+                                                        : 'bg-black/50 border-white/10 hover:border-white/20 hover:bg-black/60 shadow-sm'
                                                         }`}
                                                 >
                                                     <div className="relative flex items-center justify-center mt-0.5">
@@ -209,8 +206,8 @@ export default function ActionCardsPage() {
                                                             className="peer sr-only"
                                                         />
                                                         <div className={`w-6 h-6 rounded flex items-center justify-center border transition-all ${task.completed
-                                                                ? `${phase.solidBgClass} ${phase.borderClass} text-white`
-                                                                : 'border-zinc-600 bg-zinc-900 text-transparent hover:border-zinc-500'
+                                                            ? `${phase.solidBgClass} ${phase.borderClass} text-white`
+                                                            : 'border-zinc-600 bg-zinc-900 text-transparent hover:border-zinc-500'
                                                             }`}>
                                                             {task.completed && <CheckCircle2 className="w-4 h-4" strokeWidth={3} />}
                                                         </div>
