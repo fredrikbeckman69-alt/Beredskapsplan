@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { IntelligenceItem } from '@/lib/api/types';
-import { Activity, Zap, CloudRain, ShieldAlert, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Activity, Zap, CloudRain, ShieldAlert, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
 
 export function IntelligenceFeed() {
     const [items, setItems] = useState<IntelligenceItem[]>([]);
@@ -59,6 +59,7 @@ export function IntelligenceFeed() {
         if (source === 'SMHI') return <CloudRain className="w-5 h-5 text-blue-400" />;
         if (source === 'Polisen') return <ShieldAlert className="w-5 h-5 text-blue-500" />;
         if (source === 'MCF') return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
+        if (source === 'Länsstyrelsen') return <Landmark className="w-5 h-5 text-emerald-400" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
 
@@ -66,6 +67,7 @@ export function IntelligenceFeed() {
         if (source === 'SMHI') return 'bg-blue-500/20 text-blue-400';
         if (source === 'Polisen') return 'bg-blue-600/20 text-blue-500';
         if (source === 'MCF') return 'bg-yellow-500/20 text-yellow-500';
+        if (source === 'Länsstyrelsen') return 'bg-emerald-500/20 text-emerald-400';
         return 'bg-yellow-500/20 text-yellow-400';
     };
 
@@ -79,7 +81,7 @@ export function IntelligenceFeed() {
         return acc;
     }, {} as Record<string, IntelligenceItem[]>);
 
-    const baseSources = ['MCF', 'Polisen', 'SMHI'];
+    const baseSources = ['MCF', 'Polisen', 'SMHI', 'Länsstyrelsen'];
     const sources = [...baseSources].sort((a, b) => {
         const timeA = groupedItems[a]?.length ? new Date(groupedItems[a][0].timestamp).getTime() : 0;
         const timeB = groupedItems[b]?.length ? new Date(groupedItems[b][0].timestamp).getTime() : 0;
