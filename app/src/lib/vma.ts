@@ -24,7 +24,18 @@ export async function getActiveVMAs(): Promise<VMAAlert[]> {
         }
 
         const data = await response.json();
-        return data as VMAAlert[];
+
+        // Filter out tests directly at the API source utility as well, so other consumers
+        // don't get test VMAs passed to them.
+        const realVmas = data.filter((vma: VMAAlert) => {
+            const isTestHeadline = vma.Headline?.toLowerCase().includes('test') || false;
+            const isTestDescription = vma.Description?.toLowerCase().includes('test') || false;
+
+            if (isTestHeadline || isTestDescription) return false;
+            return true;
+        });
+
+        return realVmas as VMAAlert[];
     } catch (error) {
         console.error('Error fetching VMA:', error);
         return [];
