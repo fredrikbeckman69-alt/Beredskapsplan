@@ -19,7 +19,8 @@ export function IntelligenceFeed() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await fetch('/api/intelligence');
+                const basePath = process.env.NODE_ENV === 'production' ? '/Beredskapsplan' : '';
+                const res = await fetch(`${basePath}/api/intelligence`);
                 if (res.ok) {
                     const data = await res.json();
                     if (data.items && data.status) {
