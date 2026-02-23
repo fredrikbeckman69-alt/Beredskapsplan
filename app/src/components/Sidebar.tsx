@@ -51,6 +51,13 @@ const routes = [
         isCritical: true,
     },
     {
+        label: "Beredskap SMS",
+        icon: ShieldAlert,
+        href: "/sms-kris",
+        color: "text-red-500",
+        isCritical: true,
+    },
+    {
         label: "Risk & Sårbarhet (RSA)",
         icon: Activity,
         href: "/rsa",
@@ -79,13 +86,6 @@ const routes = [
         icon: FileText,
         href: "/it-policy",
         color: "text-[#3AA3E0]",
-    },
-    {
-        label: "Beredskap SMS",
-        icon: ShieldAlert,
-        href: "/sms-kris",
-        color: "text-red-500",
-        isCritical: true,
     },
     {
         label: "Övningar & Lärdomar",

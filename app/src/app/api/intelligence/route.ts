@@ -5,19 +5,21 @@ import { fetchPolisen } from '@/lib/api/polisen';
 import { fetchLansstyrelsen } from '@/lib/api/lansstyrelsen';
 import { fetchCERTSE } from '@/lib/api/certse';
 import { fetchBankID } from '@/lib/api/bankid';
+import { fetchP4 } from '@/lib/api/p4';
 import { IntelligenceItem } from '@/lib/api/types';
 
 export const revalidate = 300; // Cache the whole route for 5 minutes
 
 export async function GET() {
     try {
-        const [krisData, smhiData, polisenData, lansstyrelsenData, certseData, bankidData] = await Promise.all([
+        const [krisData, smhiData, polisenData, lansstyrelsenData, certseData, bankidData, p4Data] = await Promise.all([
             fetchKrisinformation(),
             fetchSMHI(),
             fetchPolisen(),
             fetchLansstyrelsen(),
             fetchCERTSE(),
-            fetchBankID()
+            fetchBankID(),
+            fetchP4()
         ]);
 
         const allData: IntelligenceItem[] = [
@@ -26,7 +28,8 @@ export async function GET() {
             ...polisenData.items,
             ...lansstyrelsenData.items,
             ...certseData.items,
-            ...bankidData.items
+            ...bankidData.items,
+            ...p4Data.items
         ];
 
         // Sort by timestamp descending (newest first)
@@ -42,7 +45,8 @@ export async function GET() {
                 Polisen: polisenData.ok,
                 "Länsstyrelsen": lansstyrelsenData.ok,
                 "CERT-SE": certseData.ok,
-                "BankID": bankidData.ok
+                "BankID": bankidData.ok,
+                "Sveriges Radio P4": p4Data.ok
             }
         });
     } catch (error) {
