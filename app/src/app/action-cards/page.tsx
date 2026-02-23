@@ -95,6 +95,7 @@ const initialPhases: Phase[] = [
 export default function ActionCardsPage() {
     const [phases, setPhases] = useState<Phase[]>(initialPhases);
     const [expandedPhaseId, setExpandedPhaseId] = useState<number | null>(1); // Default Fas 1 open
+    const [activeScenario, setActiveScenario] = useState<string>("all");
 
     const toggleTask = (phaseId: number, taskId: string) => {
         setPhases(currentPhases =>
@@ -117,19 +118,36 @@ export default function ActionCardsPage() {
             <div className="flex flex-col mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3 flex items-center">
                     <ListChecks className="w-8 h-8 text-blue-500 mr-4" />
-                    Åtgärdskort
+                    Action Cards & Scenarier
                 </h2>
                 <p className="text-zinc-400 text-lg max-w-2xl">
                     Tidsbaserade checklistor (0-6h, 6-24h, 24-72h) för krisledningen.
-                    Klicka på en fas för att expandera och se alla tillhörande uppgifter.
+                    Välj ett specifikt scenario nedan för att filtrera fram relevanta punkter att agera på.
                 </p>
+
+                {/* Scenario Selection */}
+                <div className="mt-6 flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                    {scenariosList.map((scenario) => (
+                        <button
+                            key={scenario.id}
+                            onClick={() => setActiveScenario(scenario.id)}
+                            className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors border ${activeScenario === scenario.id
+                                    ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/50'
+                                    : 'bg-white/5 text-zinc-400 border-white/10 hover:bg-white/10 hover:text-zinc-200'
+                                }`}
+                        >
+                            {scenario.label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                 {phases.map((phase) => {
                     const isExpanded = expandedPhaseId === phase.id;
-                    const completedTasks = phase.tasks.filter(t => t.completed).length;
-                    const totalTasks = phase.tasks.length;
+                    const filteredTasks = phase.tasks.filter(t => t.scenarios.includes(activeScenario));
+                    const completedTasks = filteredTasks.filter(t => t.completed).length;
+                    const totalTasks = filteredTasks.length;
                     const progress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
                     const PhaseIcon = phase.icon;
 
@@ -199,43 +217,46 @@ export default function ActionCardsPage() {
                                         transition={{ duration: 0.3, ease: "easeInOut" }}
                                     >
                                         <div className="px-6 pb-6 pt-2 space-y-3">
-                                            {phase.tasks.map((task) => (
-                                                <label
-                                                    key={task.id}
-                                                    className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${task.completed
-                                                        ? 'bg-black/30 border-white/5 hover:bg-black/40'
-                                                        : 'bg-black/50 border-white/10 hover:border-white/20 hover:bg-black/60 shadow-sm'
-                                                        }`}
-                                                >
-                                                    <div className="relative flex items-center justify-center mt-0.5">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={task.completed}
-                                                            onChange={() => toggleTask(phase.id, task.id)}
-                                                            className="peer sr-only"
-                                                        />
-                                                        <div className={`w-6 h-6 rounded flex items-center justify-center border transition-all ${task.completed
-                                                            ? `${phase.solidBgClass} ${phase.borderClass} text-white`
-                                                            : 'border-zinc-600 bg-zinc-900 text-transparent hover:border-zinc-500'
-                                                            }`}>
-                                                            {task.completed && <CheckCircle2 className="w-4 h-4" strokeWidth={3} />}
+                                            {filteredTasks.length === 0 ? (
+                                                <p className="text-center text-zinc-500 py-4 text-sm">Inga åtgärder krävs för detta scenario i denna fas.</p>
+                                            ) : (
+                                                filteredTasks.map((task) => (
+                                                    <label
+                                                        key={task.id}
+                                                        className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${task.completed
+                                                            ? 'bg-black/30 border-white/5 hover:bg-black/40'
+                                                            : 'bg-black/50 border-white/10 hover:border-white/20 hover:bg-black/60 shadow-sm'
+                                                            }`}
+                                                    >
+                                                        <div className="relative flex items-center justify-center mt-0.5">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={task.completed}
+                                                                onChange={() => toggleTask(phase.id, task.id)}
+                                                                className="peer sr-only"
+                                                            />
+                                                            <div className={`w-6 h-6 rounded flex items-center justify-center border transition-all ${task.completed
+                                                                ? `${phase.solidBgClass} ${phase.borderClass} text-white`
+                                                                : 'border-zinc-600 bg-zinc-900 text-transparent hover:border-zinc-500'
+                                                                }`}>
+                                                                {task.completed && <CheckCircle2 className="w-4 h-4" strokeWidth={3} />}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <p className={`font-medium text-sm sm:text-base leading-snug transition-colors ${task.completed ? 'text-zinc-500 line-through' : 'text-zinc-200'
-                                                            }`}>
-                                                            {task.title}
-                                                        </p>
-                                                        <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs font-medium ${task.completed ? 'text-zinc-600' : 'text-zinc-400'
-                                                            }`}>
-                                                            <span className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-white/5">
-                                                                <User className="w-3 h-3" />
-                                                                {task.responsible}
-                                                            </span>
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className={`font-medium text-sm sm:text-base leading-snug transition-colors ${task.completed ? 'text-zinc-500 line-through' : 'text-zinc-200'
+                                                                }`}>
+                                                                {task.title}
+                                                            </p>
+                                                            <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs font-medium ${task.completed ? 'text-zinc-600' : 'text-zinc-400'
+                                                                }`}>
+                                                                <span className="flex items-center gap-1.5 bg-black/40 px-2 py-1 rounded border border-white/5">
+                                                                    <User className="w-3 h-3" />
+                                                                    {task.responsible}
+                                                                </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </label>
-                                            ))}
+                                                    </label>
+                                                ))}
                                         </div>
                                     </motion.div>
                                 )}
