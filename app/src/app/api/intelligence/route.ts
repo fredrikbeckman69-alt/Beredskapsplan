@@ -29,7 +29,7 @@ export async function GET() {
                 MCF: krisData.ok,
                 SMHI: smhiData.ok,
                 Polisen: polisenData.ok,
-                Länsstyrelsen: lansstyrelsenData.ok
+                "Länsstyrelsen": lansstyrelsenData.ok
             }
         });
     } catch (error) {
