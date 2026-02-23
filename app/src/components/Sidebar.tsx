@@ -19,7 +19,8 @@ import {
     ActivitySquare,
     MessageSquareWarning,
     Building2,
-    GraduationCap
+    GraduationCap,
+    Radio
 } from "lucide-react";
 
 const routes = [
@@ -98,6 +99,13 @@ const routes = [
         icon: Settings,
         href: "/settings",
         color: "text-zinc-400",
+    },
+    {
+        label: "Sveriges Radio P4",
+        icon: Radio,
+        href: "/p4",
+        color: "text-purple-400",
+        isCritical: true,
     },
 ];
 
