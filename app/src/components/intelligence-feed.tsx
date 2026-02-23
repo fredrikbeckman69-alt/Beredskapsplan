@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import smhiLogo from '../../public/logos/smhi.png';
 import polisenLogo from '../../public/logos/polisen.ico';
-import mcfLogo from '../../public/logos/mcf.png';
+import krisinformationLogo from '../../public/logos/krisinformation.png';
 import lansstyrelsenLogo from '../../public/logos/lansstyrelsen.png';
 
 export function IntelligenceFeed() {
@@ -64,7 +64,7 @@ export function IntelligenceFeed() {
     const getIconForSource = (source: string) => {
         if (source === 'SMHI') return <Image src={smhiLogo} alt="SMHI" width={24} height={24} className="object-contain" />;
         if (source === 'Polisen') return <Image src={polisenLogo} alt="Polisen" width={24} height={24} className="object-contain" />;
-        if (source === 'MCF') return <Image src={mcfLogo} alt="MCF" width={24} height={24} className="object-contain rounded-sm" />;
+        if (source === 'Krisinformation.se') return <Image src={krisinformationLogo} alt="Krisinformation.se" width={24} height={24} className="object-contain rounded-sm" />;
         if (source === 'Länsstyrelsen') return <Image src={lansstyrelsenLogo} alt="Länsstyrelsen" width={24} height={24} className="object-contain" />;
         return <Zap className="w-5 h-5 text-yellow-400" />;
     };
@@ -72,7 +72,7 @@ export function IntelligenceFeed() {
     const getBgColorForSource = (source: string) => {
         if (source === 'SMHI') return 'bg-white/10';
         if (source === 'Polisen') return 'bg-white/10';
-        if (source === 'MCF') return 'bg-white/10';
+        if (source === 'Krisinformation.se') return 'bg-white/10';
         if (source === 'Länsstyrelsen') return 'bg-white/10';
         return 'bg-yellow-500/20 text-yellow-400';
     };
@@ -87,7 +87,7 @@ export function IntelligenceFeed() {
         return acc;
     }, {} as Record<string, IntelligenceItem[]>);
 
-    const baseSources = ['MCF', 'Polisen', 'SMHI', 'Länsstyrelsen'];
+    const baseSources = ['Krisinformation.se', 'Polisen', 'SMHI', 'Länsstyrelsen'];
     const sources = [...baseSources].sort((a, b) => {
         const timeA = groupedItems[a]?.length ? new Date(groupedItems[a][0].timestamp).getTime() : 0;
         const timeB = groupedItems[b]?.length ? new Date(groupedItems[b][0].timestamp).getTime() : 0;
