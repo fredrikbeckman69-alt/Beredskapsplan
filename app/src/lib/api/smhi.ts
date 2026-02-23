@@ -2,7 +2,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 
 export async function fetchSMHI(): Promise<IntelligenceFetchResult> {
     try {
-        const res = await fetch('https://opendata-download-warnings.smhi.se/api/version/2/messages.json', {
+        const res = await fetch('https://opendata-download-warnings.smhi.se/ibww/api/version/1/warning.json', {
             next: { revalidate: 300 } // Cache for 5 minutes
         });
 
@@ -12,41 +12,46 @@ export async function fetchSMHI(): Promise<IntelligenceFetchResult> {
         }
 
         const data = await res.json();
-        const messages = data?.message || [];
+        const messages = Array.isArray(data) ? data : [];
         const items: IntelligenceItem[] = [];
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         messages.forEach((msg: any) => {
-            const timeBase = msg.timeBase || new Date().toISOString();
-            const infoList = msg.info || [];
+            const timeBase = msg.normal?.sent || new Date().toISOString();
+            const infoList = msg.normal?.info || msg.info || [];
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             infoList.forEach((info: any) => {
                 // Find swedish text if available
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 let title = 'Vädervarning';
                 if (info.event && info.event.sv) {
                     title = info.event.sv;
-                } else if (info.event) {
-                    title = typeof info.event === 'string' ? info.event : 'Vädervarning';
+                } else if (info.event && info.event.en) {
+                    title = info.event.en;
+                } else if (typeof info.event === 'string') {
+                    title = info.event;
                 }
 
                 let desc = '';
                 if (info.description && info.description.text) {
                     desc = info.description.text;
+                } else if (typeof info.description === 'string') {
+                    desc = info.description;
                 }
 
                 let severity: 'low' | 'medium' | 'high' | 'critical' = 'medium'; // Default to gul (yellow/medium)
-                const sevStr = String(info.severity).toLowerCase();
-                if (sevStr.includes('orange') || sevStr.includes('red')) {
+                const sevStr = String(info.severity || '').toLowerCase();
+                const colorStr = String(info.awareness_level || '').toLowerCase();
+
+                if (sevStr.includes('orange') || sevStr.includes('red') || colorStr.includes('orange') || colorStr.includes('red')) {
                     severity = 'high';
                 }
-                if (sevStr === 'red') {
+                if (sevStr === 'red' || colorStr.includes('red')) {
                     severity = 'critical';
                 }
 
                 items.push({
-                    id: `smhi-${Math.random().toString(36).substring(7)}`,
+                    id: `smhi-${msg.id || msg.identifier || Math.random().toString(36).substring(7)}`,
                     source: 'SMHI',
                     title: `SMHI: ${title}`,
                     description: desc,
