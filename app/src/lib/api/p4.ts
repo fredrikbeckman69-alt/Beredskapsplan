@@ -1,13 +1,14 @@
+```
 import { IntelligenceItem, IntelligenceFetchResult } from './types';
 
 export async function fetchP4(): Promise<IntelligenceFetchResult> {
     try {
         const res = await fetch('https://api.sr.se/api/v2/traffic/messages?format=json', {
-            next: { revalidate: 300 } // Cache for 5 minutes
+            cache: 'no-store'
         });
 
         if (!res.ok) {
-            console.error(`Failed to fetch SR P4: ${res.statusText}`);
+            console.error(`Failed to fetch P4: ${ res.statusText } `);
             return { items: [], ok: false };
         }
 
@@ -32,7 +33,7 @@ export async function fetchP4(): Promise<IntelligenceFetchResult> {
             }
 
             return {
-                id: `p4-${msg.id}`,
+                id: `p4 - ${ msg.id } `,
                 source: 'Sveriges Radio P4',
                 title: msg.title || 'Trafikinformation',
                 description: msg.description || msg.exactlocation || 'Trafikmeddelande från Sveriges Radio P4.',
