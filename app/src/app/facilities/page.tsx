@@ -15,18 +15,10 @@ const facilities: FacilityLocation[] = [
     {
         id: "HQ",
         name: "Huvudkontor (HQ) & Centrallager",
-        address: "Industrivägen 14, 123 45 Staden",
-        assemblyPoint: "Parkeringen vid besökarentrén (Zon A)",
-        alternativeSite: "Kontorshotell 'WorkSpace' (Månvägen 2) alt. 100% Hemarbete",
+        address: "Bronsyxegatan 8",
+        assemblyPoint: "Besöksparkeringen",
+        alternativeSite: "Bronsyxegatan 4",
         securityContact: "Lokalvaktmästare / Securitas (010-123 45 67)"
-    },
-    {
-        id: "WH2",
-        name: "Regionallager Syd",
-        address: "Sydgatan 99, 234 56 Södra Staden",
-        assemblyPoint: "Gräsmattan bakom lastkaj 4",
-        alternativeSite: "Huvudkontorets lager (Styr om logistik via ERP)",
-        securityContact: "Platschef Syd (070-987 65 43)"
     }
 ];
 
