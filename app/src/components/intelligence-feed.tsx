@@ -20,7 +20,7 @@ export function IntelligenceFeed() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const basePath = process.env.NODE_ENV === 'production' ? '/Beredskapsplan' : '';
+                const basePath = '/Beredskapsplan';
                 const res = await fetch(`${basePath}/api/intelligence`);
                 if (res.ok) {
                     const data = await res.json();
