@@ -37,8 +37,10 @@ export async function fetchLansstyrelsen(): Promise<IntelligenceFetchResult> {
 
             // Clean up description HTML
             let description = descMatch ? descMatch[1] : '';
+            // Decode entities first so HTML tags are formed before stripping
+            description = description.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
             description = description.replace(/<[^>]*>?/gm, ''); // Strip HTML tags
-            description = description.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"');
+            description = description.replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"');
 
             const timestamp = new Date(pubDateStr).toISOString();
 

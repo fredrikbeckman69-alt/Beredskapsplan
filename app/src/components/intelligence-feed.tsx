@@ -14,6 +14,7 @@ export function IntelligenceFeed() {
     const [items, setItems] = useState<IntelligenceItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [expandedSources, setExpandedSources] = useState<Record<string, boolean>>({});
+    const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
     const [sourceStatus, setSourceStatus] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
@@ -86,6 +87,11 @@ export function IntelligenceFeed() {
 
     const toggleSource = (source: string) => {
         setExpandedSources(prev => ({ ...prev, [source]: !prev[source] }));
+    };
+
+    const toggleItem = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setExpandedItems(prev => ({ ...prev, [id]: !prev[id] }));
     };
 
     const groupedItems = items.reduce((acc, item) => {
@@ -171,23 +177,43 @@ export function IntelligenceFeed() {
 
                                     {!isEmpty && (
                                         <div className="p-2 pt-0 space-y-2">
-                                            {displayItems.map((item) => (
-                                                <div key={item.id} className="flex flex-col sm:flex-row sm:items-start p-4 bg-black/20 rounded-xl border border-white/5 hover:bg-black/40 transition-colors ml-2 mr-2 mb-2 last:mb-0">
-                                                    <div className="flex-1">
-                                                        <div className="flex items-center justify-between mb-1">
-                                                            <h4 className="font-semibold text-white text-base">
-                                                                {item.title}
-                                                            </h4>
-                                                            <span className="text-xs text-zinc-500 font-medium ml-4 whitespace-nowrap">
-                                                                {formatTimeAgo(item.timestamp)}
-                                                            </span>
+                                            {displayItems.map((item) => {
+                                                const isItemExpanded = expandedItems[item.id];
+                                                return (
+                                                    <div
+                                                        key={item.id}
+                                                        onClick={(e) => toggleItem(item.id, e)}
+                                                        className="flex flex-col sm:flex-row sm:items-start p-4 bg-black/20 rounded-xl border border-white/5 hover:bg-black/40 transition-colors ml-2 mr-2 mb-2 last:mb-0 cursor-pointer"
+                                                    >
+                                                        <div className="flex-1 w-full overflow-hidden">
+                                                            <div className="flex items-center justify-between mb-2">
+                                                                <h4 className={`font-semibold text-white text-base ${isItemExpanded ? '' : 'truncate'}`}>
+                                                                    {item.title}
+                                                                </h4>
+                                                                <span className="text-xs text-zinc-500 font-medium ml-4 whitespace-nowrap flex-shrink-0">
+                                                                    {formatTimeAgo(item.timestamp)}
+                                                                </span>
+                                                            </div>
+                                                            <div className={`text-zinc-400 leading-relaxed text-sm ${isItemExpanded ? 'whitespace-pre-wrap break-words' : 'line-clamp-2'} w-full`}>
+                                                                {item.description ? item.description : item.category}
+                                                            </div>
+                                                            {isItemExpanded && item.link && (
+                                                                <div className="mt-4 mb-1">
+                                                                    <a
+                                                                        href={item.link}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        onClick={(e) => e.stopPropagation()}
+                                                                        className="inline-flex items-center text-xs font-medium bg-[#3AA3E0]/10 text-[#3AA3E0] hover:bg-[#3AA3E0]/20 border border-[#3AA3E0]/20 px-4 py-2 rounded-lg transition-colors"
+                                                                    >
+                                                                        Läs mer på källan
+                                                                    </a>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                        <p className="text-zinc-400 leading-relaxed text-sm">
-                                                            {item.description ? (item.description.length > 150 ? `${item.description.substring(0, 150)}...` : item.description) : item.category}
-                                                        </p>
                                                     </div>
-                                                </div>
-                                            ))}
+                                                )
+                                            })}
 
                                             {!isExpanded && sourceItems.length > 3 && (
                                                 <div className="px-2 pb-2 mt-2">
