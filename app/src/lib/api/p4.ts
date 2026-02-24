@@ -25,9 +25,14 @@ export async function fetchP4(): Promise<IntelligenceFetchResult> {
             // Extract the timestamp from Microsoft JSON date format "\/Date(1771845965517)\/"
             let timestamp = new Date().toISOString();
             if (msg.createddate) {
-                const match = msg.createddate.match(/\/Date\((\d+)\)\//);
+                const match = msg.createddate.match(/\/Date\((\d+)\+?\d*\)\//);
                 if (match && match[1]) {
                     timestamp = new Date(parseInt(match[1], 10)).toISOString();
+                } else {
+                    const fallbackMatch = msg.createddate.match(/\d+/);
+                    if (fallbackMatch) {
+                        timestamp = new Date(parseInt(fallbackMatch[0], 10)).toISOString();
+                    }
                 }
             }
 

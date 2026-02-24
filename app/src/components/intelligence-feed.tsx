@@ -52,7 +52,16 @@ export function IntelligenceFeed() {
                     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
                 });
 
-                setItems(sortedItems);
+                // Filter out items older than 3 days
+                const threeDaysAgo = new Date();
+                threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+                const filteredItems = sortedItems.filter(item => {
+                    const itemDate = new Date(item.timestamp);
+                    return itemDate >= threeDaysAgo;
+                });
+
+                setItems(filteredItems);
                 setSourceStatus({
                     "Krisinformation.se": krisData.ok,
                     SMHI: smhiData.ok,
