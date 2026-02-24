@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react';
 import { IntelligenceItem } from '@/lib/api/types';
 import { Activity, Zap, CloudRain, ShieldAlert, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp, Landmark, Radio } from 'lucide-react';
 import Image from 'next/image';
+import { fetchKrisinformation } from '@/lib/api/krisinformation';
+import { fetchSMHI } from '@/lib/api/smhi';
+import { fetchPolisen } from '@/lib/api/polisen';
+import { fetchLansstyrelsen } from '@/lib/api/lansstyrelsen';
+import { fetchCERTSE } from '@/lib/api/certse';
+import { fetchBankID } from '@/lib/api/bankid';
+import { fetchP4 } from '@/lib/api/p4';
 
 import smhiLogo from '../../public/logos/smhi.png';
 import polisenLogo from '../../public/logos/polisen.ico';
@@ -20,17 +27,41 @@ export function IntelligenceFeed() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const basePath = '/Beredskapsplan';
-                const res = await fetch(`${basePath}/api/intelligence`);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.items && data.status) {
-                        setItems(data.items);
-                        setSourceStatus(data.status);
-                    } else {
-                        setItems(data);
-                    }
-                }
+                const [krisData, smhiData, polisenData, lansstyrelsenData, certseData, bankidData, p4Data] = await Promise.all([
+                    fetchKrisinformation(),
+                    fetchSMHI(),
+                    fetchPolisen(),
+                    fetchLansstyrelsen(),
+                    fetchCERTSE(),
+                    fetchBankID(),
+                    fetchP4()
+                ]);
+
+                const allData: IntelligenceItem[] = [
+                    ...krisData.items,
+                    ...smhiData.items,
+                    ...polisenData.items,
+                    ...lansstyrelsenData.items,
+                    ...certseData.items,
+                    ...bankidData.items,
+                    ...p4Data.items
+                ];
+
+                // Sort by timestamp descending (newest first)
+                const sortedItems = allData.sort((a, b) => {
+                    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+                });
+
+                setItems(sortedItems);
+                setSourceStatus({
+                    "Krisinformation.se": krisData.ok,
+                    SMHI: smhiData.ok,
+                    Polisen: polisenData.ok,
+                    "Länsstyrelsen": lansstyrelsenData.ok,
+                    "CERT-SE": certseData.ok,
+                    "BankID": bankidData.ok,
+                    "Sveriges Radio P4": p4Data.ok
+                });
             } catch (error) {
                 console.error('Failed to fetch intelligence data:', error);
             } finally {
