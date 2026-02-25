@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Radio as RadioIcon, Play, Pause, AlertCircle } from 'lucide-react';
+import { Volume2, VolumeX, Radio as RadioIcon, Play, Pause, AlertCircle, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
 interface SRChannel {
@@ -166,18 +166,23 @@ export default function P4RadioPlayer() {
                         <label htmlFor="channel-select" className="block text-sm font-medium text-zinc-400 mb-2">
                             Välj lokal P4-kanal
                         </label>
-                        <select
-                            id="channel-select"
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#3AA3E0]/50 appearance-none"
-                            value={selectedChannel?.id || ''}
-                            onChange={handleChannelChange}
-                        >
-                            {channels.map((channel) => (
-                                <option key={channel.id} value={channel.id}>
-                                    {channel.name}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="relative">
+                            <select
+                                id="channel-select"
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#3AA3E0]/50 appearance-none pr-10"
+                                value={selectedChannel?.id || ''}
+                                onChange={handleChannelChange}
+                            >
+                                {channels.map((channel) => (
+                                    <option key={channel.id} value={channel.id}>
+                                        {channel.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400">
+                                <ChevronDown className="w-5 h-5" />
+                            </div>
+                        </div>
                     </div>
 
                     {selectedChannel && (
