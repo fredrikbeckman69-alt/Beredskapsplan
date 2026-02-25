@@ -25,62 +25,54 @@ export function IntelligenceFeed() {
     const [sourceStatus, setSourceStatus] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
+        let isMounted = true;
+
         async function fetchData() {
-            try {
-                const [krisData, smhiData, polisenData, lansstyrelsenData, certseData, bankidData, p4Data] = await Promise.all([
-                    fetchKrisinformation(),
-                    fetchSMHI(),
-                    fetchPolisen(),
-                    fetchLansstyrelsen(),
-                    fetchCERTSE(),
-                    fetchBankID(),
-                    fetchP4()
-                ]);
+            const fetchers = [
+                { name: 'Krisinformation.se', fn: fetchKrisinformation },
+                { name: 'SMHI', fn: fetchSMHI },
+                { name: 'Polisen', fn: fetchPolisen },
+                { name: 'Länsstyrelsen', fn: fetchLansstyrelsen },
+                { name: 'CERT-SE', fn: fetchCERTSE },
+                { name: 'BankID', fn: fetchBankID },
+                { name: 'Sveriges Radio P4', fn: fetchP4 },
+            ];
 
-                const allData: IntelligenceItem[] = [
-                    ...krisData.items,
-                    ...smhiData.items,
-                    ...polisenData.items,
-                    ...lansstyrelsenData.items,
-                    ...certseData.items,
-                    ...bankidData.items,
-                    ...p4Data.items
-                ];
+            const threeDaysAgo = new Date();
+            threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
-                // Sort by timestamp descending (newest first)
-                const sortedItems = allData.sort((a, b) => {
-                    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-                });
+            fetchers.forEach(async (source) => {
+                try {
+                    const data = await source.fn();
+                    if (!isMounted) return;
 
-                // Filter out items older than 3 days
-                const threeDaysAgo = new Date();
-                threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+                    const validItems = data.items.filter(item => new Date(item.timestamp) >= threeDaysAgo);
 
-                const filteredItems = sortedItems.filter(item => {
-                    const itemDate = new Date(item.timestamp);
-                    return itemDate >= threeDaysAgo;
-                });
+                    setItems(prevItems => {
+                        const otherItems = prevItems.filter(item => item.source !== source.name);
+                        const newItems = [...otherItems, ...validItems];
+                        return newItems.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+                    });
 
-                setItems(filteredItems);
-                setSourceStatus({
-                    "Krisinformation.se": krisData.ok,
-                    SMHI: smhiData.ok,
-                    Polisen: polisenData.ok,
-                    "Länsstyrelsen": lansstyrelsenData.ok,
-                    "CERT-SE": certseData.ok,
-                    "BankID": bankidData.ok,
-                    "Sveriges Radio P4": p4Data.ok
-                });
-            } catch (error) {
-                console.error('Failed to fetch intelligence data:', error);
-            } finally {
-                setLoading(false);
-            }
+                    setSourceStatus(prev => ({ ...prev, [source.name]: data.ok }));
+                } catch (error) {
+                    if (!isMounted) return;
+                    console.error(`Failed to fetch ${source.name}:`, error);
+                    setSourceStatus(prev => ({ ...prev, [source.name]: false }));
+                } finally {
+                    if (isMounted) {
+                        setLoading(false); // Turn off skeleton as soon as any source returns
+                    }
+                }
+            });
         }
 
         fetchData();
         const interval = setInterval(fetchData, 5 * 60 * 1000);
-        return () => clearInterval(interval);
+        return () => {
+            isMounted = false;
+            clearInterval(interval);
+        };
     }, []);
 
     const formatTimeAgo = (timestamp: string) => {
