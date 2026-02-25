@@ -2,7 +2,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 
 export async function fetchP4(): Promise<IntelligenceFetchResult> {
     try {
-        const res = await fetch('https://api.sr.se/api/v2/traffic/messages?format=json', {
+        const res = await fetch('https://api.sr.se/api/v2/traffic/messages?format=json&size=100', {
             cache: 'no-store'
         });
 
