@@ -17,7 +17,7 @@ export async function fetchPolisen(): Promise<IntelligenceFetchResult> {
         if (!Array.isArray(data)) return { items: [], ok: false };
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const items = data.slice(0, 20).map((event: any) => {
+        const items = data.map((event: any) => {
             // Determine severity based on event type
             let severity: 'low' | 'medium' | 'high' | 'critical' = 'low';
 

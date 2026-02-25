@@ -45,7 +45,6 @@ export async function fetchCERTSE(): Promise<IntelligenceFetchResult> {
                 link: linkMatch ? linkMatch[1] : '',
             });
 
-            if (items.length >= 5) break; // Take only the 5 most recent
         }
 
         return { items, ok: true };
