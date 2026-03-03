@@ -55,7 +55,15 @@ export default function SMSKrisPage() {
         if (savedContacts) {
             const parsed = JSON.parse(savedContacts);
             if (parsed.length > 0) {
-                setContacts(parsed);
+                // Ensure new hardcoded contacts are added even if user has a cached list
+                const missingDefaults = defaultContacts.filter(
+                    dc => !parsed.some((pc: Contact) => pc.id === dc.id || pc.name === dc.name)
+                );
+                if (missingDefaults.length > 0) {
+                    setContacts([...parsed, ...missingDefaults]);
+                } else {
+                    setContacts(parsed);
+                }
             }
         }
     }, []);

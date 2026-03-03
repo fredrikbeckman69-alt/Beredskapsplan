@@ -38,7 +38,7 @@ const routes = [
         isCritical: true,
     },
     {
-        label: "Kontakter & Resurser",
+        label: "Krisledning",
         icon: Users,
         href: "/master-data",
         color: "text-[#3AA3E0]",
@@ -72,7 +72,7 @@ const routes = [
         color: "text-rose-500",
     },
     {
-        label: "Konsekvensanalys (BIA)",
+        label: "Konsekvensanalys",
         icon: ActivitySquare,
         href: "/bia",
         color: "text-indigo-500",

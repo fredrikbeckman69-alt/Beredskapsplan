@@ -4,7 +4,7 @@ export default function MasterDataPage() {
     return (
         <div className="p-4 md:p-8 space-y-8 w-full max-w-6xl mx-auto">
             <div>
-                <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Beredskap & Master Data</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Krisledning</h2>
                 <p className="text-zinc-400">Hantera krisorganisation, resursregister och larmmottagare.</p>
             </div>
 
@@ -155,7 +155,7 @@ export default function MasterDataPage() {
                     <div className="border-b border-[#222] bg-[#151515] px-6 py-4 flex items-center justify-between">
                         <h3 className="font-semibold flex items-center text-lg">
                             <Network className="w-5 h-5 mr-3 text-indigo-500" />
-                            Kritiska Beroenden & Leverantörer
+                            Kritiska Beroenden & Leverantörer <span className="text-xs text-rose-500 font-normal ml-2 tracking-normal bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">Utkast</span>
                         </h3>
                         <button className="text-sm bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded transition">
                             Lägg till leverantör
@@ -175,7 +175,7 @@ export default function MasterDataPage() {
                             <tbody>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
                                     <td className="pl-6 pr-3 py-4 font-medium text-white">Internetförbindelse</td>
-                                    <td className="px-3 py-4 text-zinc-300">Telia Company AB</td>
+                                    <td className="px-3 py-4 text-zinc-300">Infracom</td>
                                     <td className="px-3 py-4 text-zinc-500">4h Inställelse</td>
                                     <td className="px-3 py-4 text-zinc-400">4G/5G Router (Telenor)</td>
                                     <td className="pl-3 pr-6 py-4 text-right">
@@ -184,7 +184,7 @@ export default function MasterDataPage() {
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
                                     <td className="pl-6 pr-3 py-4 font-medium text-white">Affärssystem (ERP)</td>
-                                    <td className="px-3 py-4 text-zinc-300">Microsoft Dynamics 365</td>
+                                    <td className="px-3 py-4 text-zinc-300">Softronic</td>
                                     <td className="px-3 py-4 text-zinc-500">99.9% Uptime</td>
                                     <td className="px-3 py-4 text-zinc-400">Manuella pappersrutiner (L2)</td>
                                     <td className="pl-3 pr-6 py-4 text-right">
@@ -193,7 +193,7 @@ export default function MasterDataPage() {
                                 </tr>
                                 <tr className="border-b border-[#222] hover:bg-white/5">
                                     <td className="pl-6 pr-3 py-4 font-medium text-white">Tredjepartslogistik (3PL)</td>
-                                    <td className="px-3 py-4 text-zinc-300">PostNord Logistics</td>
+                                    <td className="px-3 py-4 text-zinc-300">Transportörsen/DBS/SSL</td>
                                     <td className="px-3 py-4 text-zinc-500">Nästa-dag-leverans</td>
                                     <td className="px-3 py-4 text-zinc-400">Eget åkeri för kritiska kunder</td>
                                     <td className="pl-3 pr-6 py-4 text-right">

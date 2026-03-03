@@ -19,8 +19,8 @@ type HoldingStatement = {
 };
 
 const targetGroups: TargetGroup[] = [
-    { id: "TG1", name: "Egen Personal", description: "Samtliga anställda och konsulter.", channel: "Intranät / SMS", responsibility: "HR / VD" },
-    { id: "TG2", name: "Nyckelkunder", description: "Kunder med kritiska SLA-avtal.", channel: "Telefon / Dedikerat Mail", responsibility: "Key Account Managers" },
+    { id: "TG1", name: "Egen Personal", description: "Samtliga anställda och konsulter.", channel: "Intranät / SMS", responsibility: "VD/Kommunikationschef" },
+    { id: "TG2", name: "Nyckelkunder", description: "Kunder med kritiska SLA-avtal.", channel: "Telefon / Dedikerat Mail", responsibility: "VD/Kundansvarig" },
     { id: "TG3", name: "Media / Allmänhet", description: "Lokaltidningar och branschpress.", channel: "Pressmeddelande / Hemsida", responsibility: "Kommunikationschef" },
     { id: "TG4", name: "Myndigheter", description: "Länsstyrelse, MSB, Polisen (vid behov).", channel: "Telefon / Säker Mail", responsibility: "VD / Säkerhetschef" },
 ];

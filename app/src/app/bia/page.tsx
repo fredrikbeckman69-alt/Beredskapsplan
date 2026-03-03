@@ -58,10 +58,10 @@ export default function BIAPage() {
                 <div>
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3 flex items-center">
                         <ActivitySquare className="w-8 h-8 text-indigo-500 mr-4" />
-                        Business Impact Analysis (BIA)
+                        Konsekvensanalys
                     </h2>
                     <p className="text-zinc-400 text-lg max-w-2xl">
-                        Klassificering av verksamhetens kritiska processer. Anger i vilken ordning system ska återställas (RTO) och tolerans för dataförlust (RPO).
+                        Klassificering av verksamhetens kritiska processer. Anger i vilken ordning system ska återställas och tolerans för dataförlust.
                     </p>
                 </div>
                 <div className="flex bg-[#111] p-1 rounded-lg border border-[#222]">

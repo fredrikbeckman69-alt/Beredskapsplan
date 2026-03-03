@@ -1,6 +1,7 @@
 "use client";
 
 import { Building2, MapPin, Map, ShieldAlert, ArrowRight, Home, FileText } from "lucide-react";
+import planImg from "../../../public/utrymningsplan-bronsyxegatan-8.jpeg";
 
 type FacilityLocation = {
     id: string;
@@ -14,11 +15,11 @@ type FacilityLocation = {
 const facilities: FacilityLocation[] = [
     {
         id: "HQ",
-        name: "Huvudkontor (HQ) & Centrallager",
+        name: "Huvudkontor & Centrallager",
         address: "Bronsyxegatan 8",
         assemblyPoint: "Besöksparkeringen",
         alternativeSite: "Bronsyxegatan 4",
-        securityContact: "Lokalvaktmästare / Securitas (010-123 45 67)"
+        securityContact: "Säkerhetschef/Securitas 0771-50 60 15. Uppge personkod och eventuellt larmnummer."
     }
 ];
 
@@ -81,6 +82,22 @@ export default function FacilitiesPage() {
                                         </div>
                                     </div>
                                 </div>
+
+                                {facility.id === "HQ" && (
+                                    <div className="mt-8 border-t border-[#222] pt-6">
+                                        <h4 className="flex items-center text-sm text-zinc-400 uppercase font-bold tracking-wider mb-4">
+                                            <Map className="w-4 h-4 mr-2" />
+                                            Utrymningsplan
+                                        </h4>
+                                        <div className="rounded-xl overflow-hidden border border-[#333] bg-[#0a0a0a]">
+                                            <img
+                                                src={planImg.src}
+                                                alt="Utrymningsplan Bronsyxegatan 8"
+                                                className="w-full h-auto object-contain"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -116,25 +133,7 @@ export default function FacilitiesPage() {
                         </ul>
                     </div>
 
-                    <div className="bg-[#111] border border-[#222] rounded-2xl p-6">
-                        <h4 className="font-bold text-white mb-4">Utrymningsplaner (PDF)</h4>
-                        <div className="space-y-2">
-                            <button className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-white/5 text-zinc-300 transition-colors group">
-                                <span className="flex items-center text-sm font-medium">
-                                    <FileText className="w-4 h-4 mr-3 text-zinc-500" />
-                                    HQ Plan 1 (Kontor)
-                                </span>
-                                <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" />
-                            </button>
-                            <button className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-white/5 text-zinc-300 transition-colors group">
-                                <span className="flex items-center text-sm font-medium">
-                                    <FileText className="w-4 h-4 mr-3 text-zinc-500" />
-                                    HQ Plan 0 (Lager)
-                                </span>
-                                <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" />
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
