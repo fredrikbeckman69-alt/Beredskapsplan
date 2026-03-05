@@ -28,43 +28,39 @@ export function IntelligenceFeed() {
         let isMounted = true;
 
         async function fetchData() {
-            const fetchers = [
-                { name: 'Krisinformation.se', fn: fetchKrisinformation },
-                { name: 'SMHI', fn: fetchSMHI },
-                { name: 'Polisen', fn: fetchPolisen },
-                { name: 'Länsstyrelsen', fn: fetchLansstyrelsen },
-                { name: 'CERT-SE', fn: fetchCERTSE },
-                { name: 'BankID', fn: fetchBankID },
-                { name: 'Sveriges Radio P4', fn: fetchP4 },
-            ];
+            try {
+                // Application uses basePath "/Beredskapsplan"
+                const res = await fetch('/Beredskapsplan/api/intelligence');
+                if (!res.ok) throw new Error('Failed to fetch intelligence data');
 
-            const threeDaysAgo = new Date();
-            threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+                const data = await res.json();
 
-            fetchers.forEach(async (source) => {
-                try {
-                    const data = await source.fn();
-                    if (!isMounted) return;
+                if (!isMounted) return;
 
-                    const validItems = data.items.filter(item => new Date(item.timestamp) >= threeDaysAgo);
+                setSourceStatus(data.status || {});
 
-                    setItems(prevItems => {
-                        const otherItems = prevItems.filter(item => item.source !== source.name);
-                        const newItems = [...otherItems, ...validItems];
-                        return newItems.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-                    });
+                const threeDaysAgo = new Date();
+                threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
-                    setSourceStatus(prev => ({ ...prev, [source.name]: data.ok }));
-                } catch (error) {
-                    if (!isMounted) return;
-                    console.error(`Failed to fetch ${source.name}:`, error);
-                    setSourceStatus(prev => ({ ...prev, [source.name]: false }));
-                } finally {
-                    if (isMounted) {
-                        setLoading(false); // Turn off skeleton as soon as any source returns
-                    }
+                const validItems = (data.items || []).filter((item: IntelligenceItem) => new Date(item.timestamp) >= threeDaysAgo);
+
+                setItems(validItems.sort((a: IntelligenceItem, b: IntelligenceItem) =>
+                    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+                ));
+
+            } catch (error) {
+                if (!isMounted) return;
+                console.error('Failed to fetch intelligence:', error);
+                // Mark all known bases as false on critical failure
+                const baseSources = ['Krisinformation.se', 'SMHI', 'Polisen', 'Länsstyrelsen', 'CERT-SE', 'BankID', 'Sveriges Radio P4'];
+                const errStatus: Record<string, boolean> = {};
+                baseSources.forEach(s => errStatus[s] = false);
+                setSourceStatus(errStatus);
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
                 }
-            });
+            }
         }
 
         fetchData();
@@ -219,14 +215,19 @@ export function IntelligenceFeed() {
                                                     >
                                                         <div className="flex-1 w-full overflow-hidden">
                                                             <div className="flex items-center justify-between mb-2">
-                                                                <h4 className={`font-semibold text-white text-base ${isItemExpanded ? '' : 'truncate'}`}>
+                                                                <h4 className={`font-semibold text-white text-base ${isItemExpanded ? '' : 'truncate flex-1'}`}>
                                                                     {item.title}
                                                                 </h4>
-                                                                <span className="text-xs text-zinc-500 font-medium ml-4 whitespace-nowrap flex-shrink-0">
-                                                                    {formatTimeAgo(item.timestamp)}
-                                                                </span>
+                                                                <div className="flex items-center ml-4 flex-shrink-0">
+                                                                    <span className="text-xs text-zinc-500 font-medium whitespace-nowrap mr-2">
+                                                                        {formatTimeAgo(item.timestamp)}
+                                                                    </span>
+                                                                    <div className="p-1 rounded-full bg-white/5 text-zinc-400 hover:text-white transition-colors">
+                                                                        {isItemExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className={`text-zinc-400 leading-relaxed text-sm ${isItemExpanded ? 'whitespace-pre-wrap break-words' : 'line-clamp-2'} w-full`}>
+                                                            <div className={`text-zinc-400 leading-relaxed text-sm ${isItemExpanded ? 'whitespace-pre-wrap break-words mt-3' : 'line-clamp-2'} w-full`}>
                                                                 {item.description ? item.description : item.category}
                                                             </div>
                                                             {isItemExpanded && item.link && (

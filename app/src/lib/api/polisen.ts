@@ -2,7 +2,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 
 export async function fetchPolisen(): Promise<IntelligenceFetchResult> {
     try {
-        const res = await fetch('https://api.allorigins.win/raw?url=https://polisen.se/api/events', {
+        const res = await fetch('https://polisen.se/api/events', {
             cache: 'no-store'
         });
 

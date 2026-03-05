@@ -1,0 +1,14 @@
+{
+    "name": "video-scripts",
+    "version": "1.0.0",
+    "description": "Scripts for video generation",
+    "main": "index.js",
+    "scripts": {
+        "capture": "node capture_promo.js",
+        "tts": "node generate_tts_en.js"
+    },
+    "dependencies": {
+        "google-tts-api": "^2.0.2",
+        "puppeteer": "^22.0.0"
+    }
+}

@@ -18,12 +18,12 @@ export async function fetchKrisinformation(): Promise<IntelligenceFetchResult> {
         const items = entries.map((entry: any) => ({
             id: `msb-${entry.Identifier || Math.random().toString(36).substring(7)}`,
             source: 'Krisinformation.se',
-            title: entry.Title || 'Viktigt meddelande',
-            description: entry.Text || entry.Summary || '',
+            title: entry.Headline || entry.Title || 'Viktigt meddelande',
+            description: entry.Preamble || entry.Text || entry.Summary || '',
             category: 'Samhällsinformation',
             timestamp: entry.Published || new Date().toISOString(),
             severity: 'medium', // Default to medium, could be parsed from tags if needed
-            link: entry.LinkUrl,
+            link: entry.Web || entry.LinkUrl,
         }));
         return { items, ok: true };
     } catch (error) {

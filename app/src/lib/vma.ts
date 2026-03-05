@@ -13,13 +13,18 @@ export interface VMAAlert {
  */
 export async function getActiveVMAs(): Promise<VMAAlert[]> {
     try {
-        const response = await fetch('https://api.krisinformation.se/v3/vmas', {
+        const isClient = typeof window !== 'undefined';
+        const fetchUrl = isClient
+            ? '/Beredskapsplan/api/vma'
+            : 'https://api.krisinformation.se/v3/vmas';
+
+        const response = await fetch(fetchUrl, {
             // Revalidate every 60 seconds at most, though client side polling will also dictate frequency
             next: { revalidate: 60 }
         });
 
         if (!response.ok) {
-            console.error('Failed to fetch VMA from krisinformation.se');
+            console.error('Failed to fetch VMA');
             return [];
         }
 

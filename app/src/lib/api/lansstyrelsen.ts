@@ -3,7 +3,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 export async function fetchLansstyrelsen(): Promise<IntelligenceFetchResult> {
     try {
         // Fetch Länsstyrelsen news via Google News RSS for high reliability
-        const res = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://news.google.com/rss/search?q=L%C3%A4nsstyrelsen+when:7d&hl=sv&gl=SE&ceid=SE:sv'), {
+        const res = await fetch('https://news.google.com/rss/search?q=L%C3%A4nsstyrelsen+when:7d&hl=sv&gl=SE&ceid=SE:sv', {
             cache: 'no-store'
         });
 

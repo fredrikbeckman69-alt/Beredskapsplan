@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+
+@keyframes siri-pulse {
+  0% {
+    transform: scale(0.9) rotate(0deg);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.9) rotate(360deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes siri-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+
+  33% {
+    transform: translateY(-30px) translateX(20px);
+  }
+
+  66% {
+    transform: translateY(20px) translateX(-20px);
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.siri-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: siri-float 8s infinite ease-in-out alternate;
+  mix-blend-mode: screen;
+}
+
+.blob1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #ff2a7e 0%, transparent 70%);
+  top: 30%;
+  left: 30%;
+  animation-delay: 0s;
+}
+
+.blob2 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #2a9dff 0%, transparent 70%);
+  bottom: 20%;
+  right: 25%;
+  animation-delay: -3s;
+}
+
+.blob3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #c92aff 0%, transparent 70%);
+  top: 40%;
+  left: 45%;
+  animation-delay: -5s;
+}
+
+.siri-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: siri-pulse 10s infinite linear;
+}

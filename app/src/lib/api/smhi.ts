@@ -16,50 +16,82 @@ export async function fetchSMHI(): Promise<IntelligenceFetchResult> {
         const items: IntelligenceItem[] = [];
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        messages.forEach((msg: any) => {
-            const timeBase = msg.normal?.sent || new Date().toISOString();
-            const infoList = msg.normal?.info || msg.info || [];
+        messages.forEach((group: any) => {
+            const groupEventTitle = group.event?.sv || 'Vädervarning';
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            infoList.forEach((info: any) => {
-                // Find swedish text if available
-                let title = 'Vädervarning';
-                if (info.event && info.event.sv) {
-                    title = info.event.sv;
-                } else if (info.event && info.event.en) {
-                    title = info.event.en;
-                } else if (typeof info.event === 'string') {
-                    title = info.event;
-                }
+            if (Array.isArray(group.warningAreas)) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                group.warningAreas.forEach((area: any) => {
+                    const timeBase = area.published || area.approximateStart || new Date().toISOString();
 
-                let desc = '';
-                if (info.description && info.description.text) {
-                    desc = info.description.text;
-                } else if (typeof info.description === 'string') {
-                    desc = info.description;
-                }
+                    let title = groupEventTitle;
+                    if (area.eventDescription && area.eventDescription.sv) {
+                        title = `${groupEventTitle} (${area.eventDescription.sv})`;
+                    } else if (area.eventDescription && area.eventDescription.en) {
+                        title = `${groupEventTitle} (${area.eventDescription.en})`;
+                    }
 
-                let severity: 'low' | 'medium' | 'high' | 'critical' = 'medium'; // Default to gul (yellow/medium)
-                const sevStr = String(info.severity || '').toLowerCase();
-                const colorStr = String(info.awareness_level || '').toLowerCase();
+                    // Combine descriptions texts
+                    let desc = '';
+                    if (Array.isArray(area.descriptions)) {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        desc = area.descriptions.map((d: any) => {
+                            let cleanText = '';
+                            if (d.text && typeof d.text === 'object' && d.text.sv) {
+                                cleanText = d.text.sv;
+                            } else if (typeof d.text === 'string') {
+                                cleanText = d.text;
+                                if (cleanText.startsWith('@{sv=')) {
+                                    const match = cleanText.match(/@\{sv=([^;]+);/);
+                                    if (match) cleanText = match[1];
+                                }
+                            }
 
-                if (sevStr.includes('orange') || sevStr.includes('red') || colorStr.includes('orange') || colorStr.includes('red')) {
-                    severity = 'high';
-                }
-                if (sevStr === 'red' || colorStr.includes('red')) {
-                    severity = 'critical';
-                }
+                            // Extract title for the description section if available
+                            let dTitle = '';
+                            if (d.title && typeof d.title === 'object' && d.title.sv) {
+                                dTitle = `**${d.title.sv}**\n`;
+                            } else if (typeof d.title === 'string' && d.title.startsWith('@{sv=')) {
+                                const match = d.title.match(/@\{sv=([^;]+);/);
+                                if (match) dTitle = `**${match[1]}**\n`;
+                            }
 
-                items.push({
-                    id: `smhi-${msg.id || msg.identifier || Math.random().toString(36).substring(7)}`,
-                    source: 'SMHI',
-                    title: `SMHI: ${title}`,
-                    description: desc,
-                    category: 'Väder',
-                    timestamp: timeBase,
-                    severity,
+                            return cleanText ? `${dTitle}${cleanText}`.trim() : '';
+                        }).filter(Boolean).join('\n\n');
+                    }
+
+                    if (area.areaName && area.areaName.sv) {
+                        desc = `**Område:** ${area.areaName.sv}\n\n${desc}`;
+                    }
+
+                    let severity: 'low' | 'medium' | 'high' | 'critical' = 'medium'; // Default to medium
+                    const warningLevelCode = String(area.warningLevel?.code || '').toLowerCase();
+                    const warningLevelSv = String(area.warningLevel?.sv || '').toLowerCase();
+
+                    if (warningLevelSv.includes('orange') || warningLevelCode.includes('orange')) {
+                        severity = 'high';
+                    }
+                    if (warningLevelSv.includes('röd') || warningLevelCode.includes('red')) {
+                        severity = 'critical';
+                    }
+                    if (warningLevelSv.includes('gul') || warningLevelCode.includes('yellow')) {
+                        severity = 'medium';
+                    }
+                    if (warningLevelCode.includes('message') || warningLevelSv.includes('meddelande')) {
+                        severity = 'low'; // Using low for pure "meddelande"
+                    }
+
+                    items.push({
+                        id: `smhi-${area.id || Math.random().toString(36).substring(7)}`,
+                        source: 'SMHI',
+                        title: `SMHI: ${title}`,
+                        description: desc.trim(),
+                        category: area.warningLevel?.sv || 'Väder',
+                        timestamp: timeBase,
+                        severity,
+                    });
                 });
-            });
+            }
         });
 
         return { items, ok: true };

@@ -1,0 +1,10 @@
+# Global ignores
+node_modules/
+.env*
+.DS_Store
+
+# Video package
+video/node_modules/
+video/.next/
+video/out/
+video/build/

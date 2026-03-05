@@ -20,10 +20,18 @@ import {
     MessageSquareWarning,
     Building2,
     GraduationCap,
-    Radio
+    Radio,
+    ClipboardList
 } from "lucide-react";
 
 const routes = [
+    {
+        label: "Beredskapsplanering",
+        icon: ClipboardList,
+        href: "/beredskapsplanering",
+        color: "text-white",
+        isMain: true,
+    },
     {
         label: "Översiktsvy",
         icon: LayoutDashboard,
@@ -64,6 +72,12 @@ const routes = [
         href: "/p4",
         color: "text-purple-400",
         isCritical: true,
+    },
+    {
+        label: "Anhöriga",
+        icon: Users,
+        href: "/next-of-kin",
+        color: "text-indigo-400",
     },
     {
         label: "Risk & Sårbarhet (RSA)",
@@ -128,12 +142,12 @@ export function Sidebar({ mobile }: SidebarProps) {
                             className={cn(
                                 "flex flex-col shrink-0 items-center justify-center w-16 h-14 rounded-2xl transition-all duration-300 relative overflow-hidden",
                                 isActive
-                                    ? (route.isCritical ? "bg-rose-500/20 scale-105 shadow-[inset_0_1px_1px_rgba(244,63,94,0.3)] ring-1 ring-inset ring-rose-500/30" : "bg-white/10 scale-105")
-                                    : (route.isCritical ? "bg-rose-500/10 hover:bg-rose-500/20 ring-1 ring-inset ring-rose-500/20" : "hover:bg-white/5")
+                                    ? ((route as any).isMain ? "bg-[#FD823D] scale-105 shadow-lg ring-1 ring-inset ring-white/20" : route.isCritical ? "bg-rose-500/20 scale-105 shadow-[inset_0_1px_1px_rgba(244,63,94,0.3)] ring-1 ring-inset ring-rose-500/30" : "bg-white/10 scale-105")
+                                    : ((route as any).isMain ? "bg-[#FD823D]/90 hover:bg-[#FD823D] ring-1 ring-inset ring-white/10 opacity-90 hover:opacity-100" : route.isCritical ? "bg-rose-500/10 hover:bg-rose-500/20 ring-1 ring-inset ring-rose-500/20" : "hover:bg-white/5")
                             )}
                         >
-                            <route.icon className={cn("h-6 w-6 mb-1 transition-colors", isActive ? route.color : (route.isCritical ? route.color : "text-zinc-500"))} />
-                            <span className={cn("text-[10px] whitespace-nowrap overflow-hidden text-ellipsis px-1 font-medium tracking-wide w-full text-center", isActive ? "text-white" : (route.isCritical ? "text-rose-100" : "text-zinc-500"))}>
+                            <route.icon className={cn("h-6 w-6 mb-1 transition-colors", (route as any).isMain ? "text-white" : isActive ? route.color : (route.isCritical ? route.color : "text-zinc-500"))} />
+                            <span className={cn("text-[10px] whitespace-nowrap overflow-hidden text-ellipsis px-1 font-medium tracking-wide w-full text-center", (route as any).isMain ? "text-white" : isActive ? "text-white" : (route.isCritical ? "text-rose-100" : "text-zinc-500"))}>
                                 {route.label.split(' ')[0]}
                             </span>
                         </Link>
@@ -176,12 +190,12 @@ export function Sidebar({ mobile }: SidebarProps) {
                                 className={cn(
                                     "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer rounded-2xl transition-all duration-300 relative overflow-hidden",
                                     isActive
-                                        ? (route.isCritical ? "bg-rose-500/20 text-white shadow-[inset_0_1px_1px_rgba(244,63,94,0.3)] ring-1 ring-inset ring-rose-500/30" : "bg-white/10 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]")
-                                        : (route.isCritical ? "text-rose-100 bg-rose-500/10 hover:bg-rose-500/20 hover:text-white ring-1 ring-inset ring-rose-500/20" : "text-zinc-400 hover:text-white hover:bg-[#3AA3E0]/10")
+                                        ? ((route as any).isMain ? "bg-[#FD823D] text-white shadow-lg ring-1 ring-inset ring-white/20" : route.isCritical ? "bg-rose-500/20 text-white shadow-[inset_0_1px_1px_rgba(244,63,94,0.3)] ring-1 ring-inset ring-rose-500/30" : "bg-white/10 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]")
+                                        : ((route as any).isMain ? "text-white bg-[#FD823D] hover:brightness-110 shadow hover:shadow-md ring-1 ring-inset ring-white/10" : route.isCritical ? "text-rose-100 bg-rose-500/10 hover:bg-rose-500/20 hover:text-white ring-1 ring-inset ring-rose-500/20" : "text-zinc-400 hover:text-white hover:bg-[#3AA3E0]/10")
                                 )}
                             >
                                 <div className="flex items-center flex-1">
-                                    <route.icon className={cn("h-5 w-5 mr-3 transition-colors", isActive ? route.color : (route.isCritical ? route.color : "text-zinc-500 group-hover:text-zinc-300"))} />
+                                    <route.icon className={cn("h-5 w-5 mr-3 transition-colors", (route as any).isMain ? "text-white" : isActive ? route.color : (route.isCritical ? route.color : "text-zinc-500 group-hover:text-zinc-300"))} />
                                     <span className="tracking-wide">{route.label}</span>
                                 </div>
                             </Link>

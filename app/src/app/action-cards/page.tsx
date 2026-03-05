@@ -32,6 +32,7 @@ const scenariosList = [
     { id: "cyber", label: "IT-haveri / Ransomware" },
     { id: "facility", label: "Skalskydd Hotat / Inbrott" },
     { id: "nis2", label: "Signifikant Incident (NIS2)" },
+    { id: "cer", label: "CER-incident (Fysisk Störning)" },
 ];
 
 // Complete data for all phases
@@ -46,14 +47,15 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-blue-500",
         borderClass: "border-blue-500",
         tasks: [
-            { id: "1-1", title: "Kalla in Krisledningsgruppen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "1-2", title: "Säkra larm och fysiskt skalskydd", responsible: "Beredskapsledare (Fysisk Miljö)", completed: false, scenarios: ["all", "power", "facility"] },
-            { id: "1-3", title: "Uppdatera personal om läget", responsible: "Affärsstöd/HR", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "1-4", title: "Initial skadebedömning", responsible: "Driftchef", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "1-1", title: "Kalla in Krisledningsgruppen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "1-2", title: "Säkra larm och fysiskt skalskydd", responsible: "Beredskapsledare (Fysisk Miljö)", completed: false, scenarios: ["all", "power", "facility", "cer"] },
+            { id: "1-3", title: "Uppdatera personal om läget", responsible: "Affärsstöd/HR", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "1-4", title: "Initial skadebedömning", responsible: "Driftchef", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
             { id: "1-5", title: "Säkra IT-miljö och data", responsible: "IT-ansvarig", completed: false, scenarios: ["all", "cyber", "power", "nis2"] },
-            { id: "1-6", title: "Kontakta berörda myndigheter vid behov", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["all", "facility", "cyber", "nis2"] },
-            { id: "1-7", title: "Informera styrelsen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "1-8", title: "Upprätta kommunikationsplan (intern/extern)", responsible: "Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "1-6", title: "Kontakta berörda myndigheter vid behov", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["all", "facility", "cyber", "nis2", "cer"] },
+            { id: "1-7", title: "Informera styrelsen", responsible: "VD", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "1-8", title: "Upprätta kommunikationsplan (intern/extern)", responsible: "Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "1-9", title: "Bedöm om händelsen uppfyller kriterier för CER-incident (väsentlig störning av drabbade användare, varaktighet, geografisk utbredning)", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["cer"] },
         ]
     },
     {
@@ -66,13 +68,14 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-amber-500",
         borderClass: "border-amber-500",
         tasks: [
-            { id: "2-1", title: "Hantera leverantörskommunikation", responsible: "Supply Chain", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "2-2", title: "Utvärdera behov av externt stöd (PR, juridik)", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "cyber", "facility", "nis2"] },
-            { id: "2-3", title: "Planera för skiftgång i krisledningen", responsible: "HR / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "2-1", title: "Hantera leverantörskommunikation", responsible: "Supply Chain", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "2-2", title: "Utvärdera behov av externt stöd (PR, juridik)", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "cyber", "facility", "nis2", "cer"] },
+            { id: "2-3", title: "Planera för skiftgång i krisledningen", responsible: "HR / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
             { id: "2-4", title: "Säkerställ likviditet och ekonomiska åtgärder", responsible: "CFO", completed: false, scenarios: ["all", "cyber"] },
-            { id: "2-5", title: "Informera nyckelkunder", responsible: "Försäljningschef", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "2-6", title: "Uppdatera skadebedömning och prognos", responsible: "Driftchef / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "2-5", title: "Informera nyckelkunder", responsible: "Försäljningschef", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "2-6", title: "Uppdatera skadebedömning och prognos", responsible: "Driftchef / Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
             { id: "2-7", title: "Lämna tidig varning (Early Warning) till MSB/CERT-SE (enligt NIS2, inom 24h)", responsible: "VD / IT-ansvarig", completed: false, scenarios: ["nis2", "cyber"] },
+            { id: "2-8", title: "Lämna första anmälan om CER-incident till behörig myndighet (inom 24h)", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["cer"] },
         ]
     },
     {
@@ -85,13 +88,14 @@ const initialPhases: Phase[] = [
         solidBgClass: "bg-rose-500",
         borderClass: "border-rose-500",
         tasks: [
-            { id: "3-1", title: "Planera för återgång till normalläge (Recovery)", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "3-1", title: "Planera för återgång till normalläge (Recovery)", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
             { id: "3-2", title: "Genomför djupgående teknisk/operationell analys", responsible: "IT / Driftchef", completed: false, scenarios: ["all", "cyber", "power", "nis2"] },
-            { id: "3-3", title: "Utvärdera psykosocialt stöd för personal", responsible: "HR", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "3-4", title: "Sammanställ initial dokumentation och loggar (Bevissäkring)", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
-            { id: "3-5", title: "Kommunicera långsiktig plan externt", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2"] },
+            { id: "3-3", title: "Utvärdera psykosocialt stöd för personal", responsible: "HR", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "3-4", title: "Sammanställ initial dokumentation och loggar (Bevissäkring)", responsible: "Beredskapsledare", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
+            { id: "3-5", title: "Kommunicera långsiktig plan externt", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["all", "power", "cyber", "facility", "nis2", "cer"] },
             { id: "3-6", title: "Lämna incidentrapport till MSB/CERT-SE (enligt NIS2, inom 72h)", responsible: "VD / IT-ansvarig", completed: false, scenarios: ["nis2", "cyber"] },
             { id: "3-7", title: "Informera drabbade tjänstemottagare / kunder om incidenten", responsible: "VD / Kommunikationsansvarig", completed: false, scenarios: ["nis2", "cyber"] },
+            { id: "3-8", title: "Påbörja detaljerad slutrapport för CER-incident (ska skickas senast inom en månad)", responsible: "VD / Beredskapsledare", completed: false, scenarios: ["cer"] },
         ]
     }
 ];
@@ -130,7 +134,7 @@ export default function ActionCardsPage() {
                 </p>
 
                 {/* Scenario Selection */}
-                <div className="mt-6 flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                <div className="mt-6 flex flex-wrap gap-2">
                     {scenariosList.map((scenario) => (
                         <button
                             key={scenario.id}
