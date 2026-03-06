@@ -34,23 +34,45 @@ export default function NextOfKinPage() {
     // Accordion state
     const [expandedStaff, setExpandedStaff] = useState<string | null>(null);
 
-    // Load from localStorage on mount
+    // Load from API on mount
     useEffect(() => {
-        const savedContacts = localStorage.getItem('nextOfKinContacts');
-        if (savedContacts) {
+        const fetchContacts = async () => {
             try {
-                setContacts(JSON.parse(savedContacts));
+                const response = await fetch('/Beredskapsplan/api/next-of-kin');
+                if (response.ok) {
+                    const data = await response.json();
+                    setContacts(data);
+                } else {
+                    console.error("Failed to fetch next-of-kin contacts");
+                }
             } catch (e) {
-                console.error("Failed to parse nextOfKinContacts from localStorage");
+                console.error("Error fetching next-of-kin contacts", e);
+            } finally {
+                setIsLoaded(true);
             }
-        }
-        setIsLoaded(true);
+        };
+
+        fetchContacts();
     }, []);
 
-    // Save to localStorage when contacts change
+    // Save to API when contacts change
     useEffect(() => {
         if (isLoaded) {
-            localStorage.setItem('nextOfKinContacts', JSON.stringify(contacts));
+            const saveContacts = async () => {
+                try {
+                    await fetch('/Beredskapsplan/api/next-of-kin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(contacts),
+                    });
+                } catch (e) {
+                    console.error("Error saving next-of-kin contacts", e);
+                }
+            };
+
+            saveContacts();
         }
     }, [contacts, isLoaded]);
 
@@ -157,7 +179,7 @@ export default function NextOfKinPage() {
             <div className="flex flex-col mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3 flex items-center">
                     <Users className="w-8 h-8 text-indigo-500 mr-4" />
-                    Anhöriga (Next of Kin)
+                    Anhöriga
                 </h2>
                 <p className="text-zinc-400 text-lg max-w-2xl">
                     Här kan du registrera och visa kontaktuppgifter till anhöriga för personal.

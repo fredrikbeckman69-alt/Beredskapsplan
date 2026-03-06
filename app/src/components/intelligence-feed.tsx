@@ -39,10 +39,10 @@ export function IntelligenceFeed() {
 
                 setSourceStatus(data.status || {});
 
-                const threeDaysAgo = new Date();
-                threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+                const timeWindow = new Date();
+                timeWindow.setDate(timeWindow.getDate() - 14); // 2 weeks lookback to prevent slow feeds from appearing empty
 
-                const validItems = (data.items || []).filter((item: IntelligenceItem) => new Date(item.timestamp) >= threeDaysAgo);
+                const validItems = (data.items || []).filter((item: IntelligenceItem) => new Date(item.timestamp) >= timeWindow);
 
                 setItems(validItems.sort((a: IntelligenceItem, b: IntelligenceItem) =>
                     new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
