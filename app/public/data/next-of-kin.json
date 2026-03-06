@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "1772777517609z212jbt",
+    "name": "Ellen Beckman",
+    "phone": "+46725866660",
+    "address": "",
+    "relation": "Dotter",
+    "staffName": "Fredrik Beckman"
+  },
+  {
+    "id": "17727775333067ctsla5",
+    "name": "Linnéa Beckman",
+    "phone": "+46725866670",
+    "address": "",
+    "relation": "Dotter",
+    "staffName": "Fredrik Beckman"
+  }
+]
