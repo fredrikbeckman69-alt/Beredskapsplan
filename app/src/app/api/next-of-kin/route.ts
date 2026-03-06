@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
+import { promises as fs } from 'fs';
 import path from 'path';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 // Define the path to the JSON file
 const DATA_DIR = path.join(process.cwd(), 'data');
