@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: process.env.GITHUB_ACTIONS ? "export" : undefined,
   basePath: "/Beredskapsplan",
   images: {
     unoptimized: true,

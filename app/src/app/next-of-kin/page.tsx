@@ -34,28 +34,66 @@ export default function NextOfKinPage() {
     // Accordion state
     const [expandedStaff, setExpandedStaff] = useState<string | null>(null);
 
-    // Load from localStorage on mount
+    // Load from API or static JSON on mount
     useEffect(() => {
-        try {
-            const savedData = localStorage.getItem('nextOfKinContacts');
-            if (savedData) {
-                setContacts(JSON.parse(savedData));
+        const fetchContacts = async () => {
+            try {
+                // Try API first (works locally)
+                let response = await fetch('/Beredskapsplan/api/next-of-kin', { cache: 'no-store' });
+
+                // If API fails (e.g. on GitHub Pages), fallback to static JSON
+                if (!response.ok) {
+                    response = await fetch('/Beredskapsplan/data/next-of-kin.json?t=' + Date.now(), { cache: 'no-store' });
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setContacts(data);
+                } else {
+                    // Only fallback to localStorage if no file exists
+                    const savedData = localStorage.getItem('nextOfKinContacts');
+                    if (savedData) {
+                        setContacts(JSON.parse(savedData));
+                    }
+                }
+            } catch (e) {
+                console.error("Error fetching next-of-kin contacts", e);
+            } finally {
+                setIsLoaded(true);
             }
-        } catch (e) {
-            console.error("Error loading next-of-kin contacts from storage", e);
-        } finally {
-            setIsLoaded(true);
-        }
+        };
+
+        fetchContacts();
     }, []);
 
-    // Save to localStorage when contacts change
+    // Save to API when contacts change
     useEffect(() => {
         if (isLoaded) {
-            try {
-                localStorage.setItem('nextOfKinContacts', JSON.stringify(contacts));
-            } catch (e) {
-                console.error("Error saving next-of-kin contacts to storage", e);
-            }
+            const saveContacts = async () => {
+                try {
+                    const res = await fetch('/Beredskapsplan/api/next-of-kin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(contacts),
+                    });
+                    if (!res.ok) {
+                        console.warn('API save failed (expected on GitHub Pages). Saving to localStorage.');
+                    }
+                } catch (e) {
+                    console.error("Error saving next-of-kin contacts via API", e);
+                }
+
+                // Fallback / Safety net
+                try {
+                    localStorage.setItem('nextOfKinContacts', JSON.stringify(contacts));
+                } catch (e) {
+                    console.error("Error saving next-of-kin contacts to storage", e);
+                }
+            };
+
+            saveContacts();
         }
     }, [contacts, isLoaded]);
 
