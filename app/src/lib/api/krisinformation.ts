@@ -3,7 +3,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 export async function fetchKrisinformation(): Promise<IntelligenceFetchResult> {
     try {
         const res = await fetch('https://api.krisinformation.se/v3/news?format=json', {
-            cache: 'no-store'
+            cache: 'force-cache'
         });
 
         if (!res.ok) {

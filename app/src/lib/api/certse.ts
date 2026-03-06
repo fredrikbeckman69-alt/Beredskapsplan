@@ -4,7 +4,7 @@ export async function fetchCERTSE(): Promise<IntelligenceFetchResult> {
     try {
         // Server-side fetching
         const res = await fetch('https://www.cert.se/feed/rss.xml', {
-            cache: 'no-store' // Avoid caching old results
+            cache: 'force-cache' // Allow caching during static build
         });
 
         if (!res.ok) {
