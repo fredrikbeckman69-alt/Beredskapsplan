@@ -34,45 +34,28 @@ export default function NextOfKinPage() {
     // Accordion state
     const [expandedStaff, setExpandedStaff] = useState<string | null>(null);
 
-    // Load from API on mount
+    // Load from localStorage on mount
     useEffect(() => {
-        const fetchContacts = async () => {
-            try {
-                const response = await fetch('/Beredskapsplan/api/next-of-kin');
-                if (response.ok) {
-                    const data = await response.json();
-                    setContacts(data);
-                } else {
-                    console.error("Failed to fetch next-of-kin contacts");
-                }
-            } catch (e) {
-                console.error("Error fetching next-of-kin contacts", e);
-            } finally {
-                setIsLoaded(true);
+        try {
+            const savedData = localStorage.getItem('nextOfKinContacts');
+            if (savedData) {
+                setContacts(JSON.parse(savedData));
             }
-        };
-
-        fetchContacts();
+        } catch (e) {
+            console.error("Error loading next-of-kin contacts from storage", e);
+        } finally {
+            setIsLoaded(true);
+        }
     }, []);
 
-    // Save to API when contacts change
+    // Save to localStorage when contacts change
     useEffect(() => {
         if (isLoaded) {
-            const saveContacts = async () => {
-                try {
-                    await fetch('/Beredskapsplan/api/next-of-kin', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(contacts),
-                    });
-                } catch (e) {
-                    console.error("Error saving next-of-kin contacts", e);
-                }
-            };
-
-            saveContacts();
+            try {
+                localStorage.setItem('nextOfKinContacts', JSON.stringify(contacts));
+            } catch (e) {
+                console.error("Error saving next-of-kin contacts to storage", e);
+            }
         }
     }, [contacts, isLoaded]);
 
