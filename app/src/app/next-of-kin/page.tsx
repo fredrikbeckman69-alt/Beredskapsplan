@@ -356,6 +356,10 @@ export default function NextOfKinPage() {
                                 className="w-full bg-black/50 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-zinc-600 resize-none h-28"
                                 placeholder="Skriv in krismeddelande här..."
                                 disabled={contacts.length === 0}
+                                autoComplete="off"
+                                data-1p-ignore="true"
+                                data-lpignore="true"
+                                data-form-type="other"
                             />
                             <div className="mt-4 flex justify-end">
                                 <button

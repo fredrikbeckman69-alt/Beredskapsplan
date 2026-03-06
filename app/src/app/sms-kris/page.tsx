@@ -337,6 +337,10 @@ export default function SMSKrisPage() {
                                     onChange={(e) => setSmsMessage(e.target.value)}
                                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 resize-none text-sm placeholder:text-zinc-600"
                                     placeholder="Skriv kris-meddelande här..."
+                                    autoComplete="off"
+                                    data-1p-ignore="true"
+                                    data-lpignore="true"
+                                    data-form-type="other"
                                 ></textarea>
                                 <p className="text-xs text-zinc-500 mt-2 flex justify-between">
                                     <span>{smsMessage.length} tecken</span>
