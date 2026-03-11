@@ -14,7 +14,7 @@ import { fetchP4 } from '@/lib/api/p4';
 
 import smhiLogo from '../../public/logos/smhi.png';
 import polisenLogo from '../../public/logos/polisen.ico';
-import krisinformationLogo from '../../public/logos/krisinformation.png';
+import krisinformationLogo from '../../public/logos/krisinformation.jpg';
 import lansstyrelsenLogo from '../../public/logos/lansstyrelsen.png';
 
 export function IntelligenceFeed() {
