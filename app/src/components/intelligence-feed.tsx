@@ -192,7 +192,7 @@ export function IntelligenceFeed() {
                                             {/* Live Indicator per source */}
                                             <span className="text-xs bg-[#1A2F2D] text-white px-2.5 py-1 rounded-full uppercase font-bold tracking-widest flex items-center shadow-inner mr-3 group-hover:bg-[#2B4645] transition-colors border border-[#3AA3E0]/20">
                                                 <span className={`w-1.5 h-1.5 rounded-full mr-2 ${sourceStatus[source] !== false ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.8)] animate-pulse' : 'bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.8)]'}`}></span>
-                                                LIVE
+                                                {sourceStatus[source] !== false ? 'LIVE' : 'OFFLINE'}
                                             </span>
 
                                             {!isEmpty && (
