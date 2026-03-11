@@ -45,3 +45,25 @@ Detta dokument definierar de specialistkompetenser (Skills) som agenten ska anv�
 
 ---
 **Instruktion till Agenten:** Vid varje interaktion i detta projekt, identifiera vilken eller vilka av ovanstående skills som krävs för att lösa uppgiften bäst. Kombinera dem vid behov för att leverera helhetslösningar.
+
+# Server & Deployment Context
+Du är en AI-assistent som arbetar i ett projekt vars kodbas ligger lokalt på denna Windows-maskin, men som körs (deployas) på en lokal Linux-server (Ubuntu).
+
+## Miljöer
+- **Lokal miljö C:\Users\FredrikBeckman\OneDrive - Skyddsprodukter i Sverige AB\Tor Finans\Skyddsprodukter\Antigravity projects\Beredskapsplan:** Windows. Innehåller källkoden. Starta INTE egna lokala utvecklingsservrar (som `npm run dev`) om jag inte explicit ber om det.
+- **Produktionsmiljö (Live):** Linux-server på IP `192.168.19.13`. 
+- **Live-URL för denna frontend:** http://beredskapsplan.192.168.19.13.nip.io
+
+## Infrastruktur
+Applikationen körs som en Docker-container med namnet `beredskapsplan-app` bakom en gemensam Caddy reverse proxy på Linux-servern. 
+
+## Hur du "Deployar" ändringar
+När du har skrivit eller ändrat kod lokalt och vi vill testa resultatet live på frontend-URL:en ovan, gör följande:
+1. Säkerställ att koden är sparad lokalt.
+2. För över koden till Linux-servern. Om projektet använder Git (t.ex. `git push` + SSH in och `git pull`), eller använd existerande sync-script/PSCP.
+3. Kör kommandot för att bygga om containern på servern via SSH: 
+   `ssh fredrikadmin@192.168.19.13 "cd /opt/antigravity/Lokal-Server-setup && docker compose up -d --build [CONTAINER-NAMN]"`
+
+## Felsökning
+Om du behöver se loggar från produktionen, hämta dem direkt från servern via:
+`ssh fredrikadmin@192.168.19.13 "docker logs -f beredskapsplan-app"`
