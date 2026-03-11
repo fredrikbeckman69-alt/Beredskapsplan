@@ -11,6 +11,21 @@ interface PlanItem {
     link?: string;
 }
 
+interface NotIncludedItem {
+    id: string;
+    title: string;
+    description: string;
+}
+
+const defaultNotIncludedItems: NotIncludedItem[] = [
+    { id: "1", title: "Starlink abonnemang", description: "800 kr/månad." },
+    { id: "2", title: "Rakel", description: "Kostnad beroende på framtida lösning 2030." },
+    { id: "3", title: "Alternativ lokal", description: "Hyres- eller driftskostnad." },
+    { id: "4", title: "Löpande bränsle", description: "Kostnad för påfyllning vid användning." },
+    { id: "5", title: "ElevenLabs talsyntes", description: "Startkostnad och förbrukningskostnad." },
+    { id: "6", title: "SMSfunktion", description: "Startkostnad och förbrukningskostnad." },
+];
+
 const defaultItems: PlanItem[] = [
     { id: "1", post: "Kontanter (i kassaskåp)", cost: 100000, status: "Angivet pris" },
     { id: "2", post: "Batteribackup (10 kWh LiFePO4)", cost: 85000, status: "Estimerad" },
@@ -37,13 +52,18 @@ const defaultItems: PlanItem[] = [
 
 export default function BeredskapsplaneringPage() {
     const [planItems, setPlanItems] = useState<PlanItem[]>([]);
+    const [notIncludedItems, setNotIncludedItems] = useState<NotIncludedItem[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Modal state
+    // Modal state for PlanItems
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState<PlanItem | null>(null);
 
-    // Form state
+    // Modal state for NotIncludedItems
+    const [isNotIncludedModalOpen, setIsNotIncludedModalOpen] = useState(false);
+    const [editingNotIncludedItem, setEditingNotIncludedItem] = useState<NotIncludedItem | null>(null);
+
+    // Form state for PlanItems
     const [formData, setFormData] = useState<Omit<PlanItem, "id">>({
         post: "",
         cost: 0,
@@ -51,8 +71,16 @@ export default function BeredskapsplaneringPage() {
         link: ""
     });
 
+    // Form state for NotIncludedItems
+    const [notIncludedFormData, setNotIncludedFormData] = useState<Omit<NotIncludedItem, "id">>({
+        title: "",
+        description: "",
+    });
+
     useEffect(() => {
         const savedItems = localStorage.getItem("beredskapsplan_items");
+        const savedNotIncludedItems = localStorage.getItem("beredskapsplan_not_included_items");
+
         if (savedItems) {
             try {
                 setPlanItems(JSON.parse(savedItems));
@@ -63,14 +91,27 @@ export default function BeredskapsplaneringPage() {
         } else {
             setPlanItems(defaultItems);
         }
+
+        if (savedNotIncludedItems) {
+            try {
+                setNotIncludedItems(JSON.parse(savedNotIncludedItems));
+            } catch (e) {
+                console.error("Failed to parse saved not included items", e);
+                setNotIncludedItems(defaultNotIncludedItems);
+            }
+        } else {
+            setNotIncludedItems(defaultNotIncludedItems);
+        }
+
         setIsLoaded(true);
     }, []);
 
     useEffect(() => {
         if (isLoaded) {
             localStorage.setItem("beredskapsplan_items", JSON.stringify(planItems));
+            localStorage.setItem("beredskapsplan_not_included_items", JSON.stringify(notIncludedItems));
         }
-    }, [planItems, isLoaded]);
+    }, [planItems, notIncludedItems, isLoaded]);
 
     const totalCost = planItems.reduce((acc, item) => acc + item.cost, 0);
 
@@ -124,6 +165,51 @@ export default function BeredskapsplaneringPage() {
     const handleDelete = (id: string) => {
         if (confirm("Är du säker på att du vill ta bort den här posten?")) {
             setPlanItems(prev => prev.filter(item => item.id !== id));
+        }
+    };
+
+    const handleOpenNotIncludedModal = (item?: NotIncludedItem) => {
+        if (item) {
+            setEditingNotIncludedItem(item);
+            setNotIncludedFormData({
+                title: item.title,
+                description: item.description,
+            });
+        } else {
+            setEditingNotIncludedItem(null);
+            setNotIncludedFormData({
+                title: "",
+                description: "",
+            });
+        }
+        setIsNotIncludedModalOpen(true);
+    };
+
+    const handleCloseNotIncludedModal = () => {
+        setIsNotIncludedModalOpen(false);
+        setEditingNotIncludedItem(null);
+    };
+
+    const handleSaveNotIncluded = () => {
+        if (!notIncludedFormData.title.trim()) return;
+
+        if (editingNotIncludedItem) {
+            setNotIncludedItems(prev => prev.map(item =>
+                item.id === editingNotIncludedItem.id ? { ...notIncludedFormData, id: item.id } : item
+            ));
+        } else {
+            const newItem: NotIncludedItem = {
+                ...notIncludedFormData,
+                id: Date.now().toString()
+            };
+            setNotIncludedItems(prev => [...prev, newItem]);
+        }
+        handleCloseNotIncludedModal();
+    };
+
+    const handleDeleteNotIncluded = (id: string) => {
+        if (confirm("Är du säker på att du vill ta bort den här posten?")) {
+            setNotIncludedItems(prev => prev.filter(item => item.id !== id));
         }
     };
 
@@ -237,35 +323,48 @@ export default function BeredskapsplaneringPage() {
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-white/10">
-                            <div className="flex items-start gap-3 text-zinc-300 bg-amber-500/5 p-5 rounded-2xl border border-amber-500/10">
+                            <div className="flex items-start gap-3 text-zinc-300 bg-amber-500/5 p-5 rounded-2xl border border-amber-500/10 relative group/notincluded">
                                 <Info className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                                <div>
-                                    <h4 className="text-sm font-semibold text-amber-500 uppercase tracking-wide mb-3">Ej inkluderat i summan (kräver offert eller abonnemang)</h4>
+                                <div className="flex-1">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <h4 className="text-sm font-semibold text-amber-500 uppercase tracking-wide">Ej inkluderat i summan (kräver offert eller abonnemang)</h4>
+                                        <button
+                                            onClick={() => handleOpenNotIncludedModal()}
+                                            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-500 rounded-lg text-xs font-medium transition-colors border border-amber-500/30"
+                                        >
+                                            <Plus className="w-3.5 h-3.5" />
+                                            Lägg till
+                                        </button>
+                                    </div>
                                     <ul className="space-y-2 text-sm">
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">Starlink abonnemang:</strong> 800 kr/månad.</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">Rakel:</strong> Kostnad beroende på framtida lösning 2030.</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">Alternativ lokal:</strong> Hyres- eller driftskostnad.</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">Löpande bränsle:</strong> Kostnad för påfyllning vid användning.</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">ElevenLabs talsyntes:</strong> Startkostnad och förbrukningskostnad.</span>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
-                                            <span><strong className="text-white">SMSfunktion:</strong> Startkostnad och förbrukningskostnad.</span>
-                                        </li>
+                                        {notIncludedItems.map(item => (
+                                            <li key={item.id} className="flex items-start group/nilist">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 mt-1.5 mr-2 shrink-0"></span>
+                                                <span className="flex-1 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                                                    <strong className="text-white">{item.title}:</strong> 
+                                                    <span className="text-zinc-400">{item.description}</span>
+                                                </span>
+                                                <div className="flex items-center gap-1 opacity-0 group-hover/nilist:opacity-100 transition-opacity ml-2 shrink-0">
+                                                    <button
+                                                        onClick={() => handleOpenNotIncludedModal(item)}
+                                                        className="p-1 text-zinc-500 hover:text-amber-400 hover:bg-amber-500/10 rounded-md transition-colors"
+                                                        title="Redigera"
+                                                    >
+                                                        <Edit2 className="w-3.5 h-3.5" />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDeleteNotIncluded(item.id)}
+                                                        className="p-1 text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors"
+                                                        title="Ta bort"
+                                                    >
+                                                        <Trash2 className="w-3.5 h-3.5" />
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        ))}
+                                        {notIncludedItems.length === 0 && (
+                                            <li className="text-zinc-500 italic">Inga poster inlagda.</li>
+                                        )}
                                     </ul>
                                 </div>
                             </div>
@@ -348,6 +447,63 @@ export default function BeredskapsplaneringPage() {
                                 onClick={handleSave}
                                 disabled={!formData.post.trim()}
                                 className="px-5 py-2.5 bg-[#3AA3E0] hover:bg-[#3AA3E0]/90 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(58,163,224,0.3)]"
+                            >
+                                Spara
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Edit/Add Not Included Modal */}
+            {isNotIncludedModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <div className="bg-[#1A2F2D] border border-amber-500/20 rounded-3xl p-6 w-full max-w-md shadow-2xl relative animate-in zoom-in-95 duration-200">
+                        <button
+                            onClick={handleCloseNotIncludedModal}
+                            className="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
+                        <h3 className="text-2xl font-semibold text-white mb-6">
+                            {editingNotIncludedItem ? "Redigera Ej inkluderat post" : "Lägg till Ej inkluderat post"}
+                        </h3>
+
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-amber-500/80 mb-1">Titel</label>
+                                <input
+                                    type="text"
+                                    value={notIncludedFormData.title}
+                                    onChange={(e) => setNotIncludedFormData({ ...notIncludedFormData, title: e.target.value })}
+                                    className="w-full bg-black/30 border border-amber-500/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent transition-all"
+                                    placeholder="T.ex. Starlink abonnemang"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-amber-500/80 mb-1">Beskrivning</label>
+                                <textarea
+                                    value={notIncludedFormData.description}
+                                    onChange={(e) => setNotIncludedFormData({ ...notIncludedFormData, description: e.target.value })}
+                                    className="w-full bg-black/30 border border-amber-500/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent transition-all min-h-[100px] resize-y"
+                                    placeholder="T.ex. 800 kr/månad"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mt-8 flex justify-end gap-3">
+                            <button
+                                onClick={handleCloseNotIncludedModal}
+                                className="px-5 py-2.5 rounded-xl font-medium text-zinc-300 hover:text-white hover:bg-white/5 transition-colors"
+                            >
+                                Avbryt
+                            </button>
+                            <button
+                                onClick={handleSaveNotIncluded}
+                                disabled={!notIncludedFormData.title.trim() || !notIncludedFormData.description.trim()}
+                                className="px-5 py-2.5 bg-amber-500 hover:bg-amber-500/90 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(245,158,11,0.3)] text-shadow-sm"
                             >
                                 Spara
                             </button>
