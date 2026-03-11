@@ -67,3 +67,9 @@ När du har skrivit eller ändrat kod lokalt och vi vill testa resultatet live p
 ## Felsökning
 Om du behöver se loggar från produktionen, hämta dem direkt från servern via:
 `ssh fredrikadmin@192.168.19.13 "docker logs -f beredskapsplan-app"`
+
+Servern har ip 192.168.19.13
+
+ Username:     fredrikadmin
+
+Password:       JBCUanT2s2h7!
