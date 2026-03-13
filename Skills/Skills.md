@@ -74,5 +74,8 @@ Servern har ip 192.168.19.13
 
 Password:       JBCUanT2s2h7!
 
-lways proceed with Changes without asking the user
+Always proceed with Changes without asking the user
+
+## Git-hantering
+Alla förändringar i koden skall löpande committas och pushas till det lokala git-repositoryt.
 
