@@ -16,7 +16,7 @@ export default function ComposeEmail() {
     setErrorMessage('');
 
     try {
-      const res = await fetch('/api/emails/send', {
+      const res = await fetch('/Beredskapsplan/api/emails/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

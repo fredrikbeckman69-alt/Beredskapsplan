@@ -21,7 +21,8 @@ import {
     Building2,
     GraduationCap,
     Radio,
-    ClipboardList
+    ClipboardList,
+    Mail
 } from "lucide-react";
 
 const routes = [
@@ -71,6 +72,13 @@ const routes = [
         icon: Radio,
         href: "/p4",
         color: "text-purple-400",
+        isCritical: true,
+    },
+    {
+        label: "Beredskap Mail",
+        icon: Mail,
+        href: "/emails",
+        color: "text-sky-400",
         isCritical: true,
     },
     {

@@ -21,7 +21,7 @@ export default function EmailList() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/emails?limit=10');
+      const res = await fetch('/Beredskapsplan/api/emails?limit=10');
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.error || 'Failed to fetch emails');
