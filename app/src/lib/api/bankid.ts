@@ -3,7 +3,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 export async function fetchBankID(): Promise<IntelligenceFetchResult> {
     try {
         const res = await fetch('https://status.bankid.com/api/v2/summary.json', {
-            cache: 'force-cache'
+            next: { revalidate: 300 }
         });
 
         if (!res.ok) {

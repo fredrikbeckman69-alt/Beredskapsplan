@@ -3,7 +3,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 export async function fetchPolisen(): Promise<IntelligenceFetchResult> {
     try {
         const res = await fetch('https://polisen.se/api/events', {
-            cache: 'force-cache'
+            next: { revalidate: 300 }
         });
 
         if (!res.ok) {

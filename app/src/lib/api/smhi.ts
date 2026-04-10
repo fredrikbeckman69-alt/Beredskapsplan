@@ -3,7 +3,7 @@ import { IntelligenceItem, IntelligenceFetchResult } from './types';
 export async function fetchSMHI(): Promise<IntelligenceFetchResult> {
     try {
         const res = await fetch('https://opendata-download-warnings.smhi.se/ibww/api/version/1/warning.json', {
-            cache: 'force-cache'
+            next: { revalidate: 300 }
         });
 
         if (!res.ok) {
