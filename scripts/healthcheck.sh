@@ -1,6 +1,7 @@
 #!/bin/bash
 
-URL="http://beredskapsplan.192.168.19.13.nip.io/api/intelligence"
+# Configuration
+URL="http://beredskapsplan.192.168.19.13.nip.io/Beredskapsplan/api/intelligence"
 LOGFILE="/opt/antigravity/Lokal-Server-setup/healthcheck.log"
 
 timestamp=$(date '+%Y-%m-%d %H:%M:%S')
@@ -9,7 +10,7 @@ timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 20 "$URL")
 
 if [ "$HTTP_STATUS" -ne 200 ]; then
-    echo "[$timestamp] WARNING: Beredskapsplan API check failed with status $HTTP_STATUS. Restarting container..." >> "$LOGFILE"
+    echo "[$timestamp] WARNING: Beredskapsplan API check failed with status $HTTP_STATUS at $URL. Restarting container..." >> "$LOGFILE"
     cd /opt/antigravity/Lokal-Server-setup && docker compose restart beredskapsplan-app
     echo "[$timestamp] Container restarted successfully." >> "$LOGFILE"
 fi
