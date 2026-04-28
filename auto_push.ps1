@@ -1,3 +1,6 @@
+$repoPath = "C:\Users\FredrikBeckman\OneDrive - Skyddsprodukter i Sverige AB\Tor Finans\Skyddsprodukter\Antigravity projects\Beredskapsplan"
+Set-Location -Path $repoPath
+
 Write-Host "Auto-push started. Monitoring for changes..."
 while($true) {
     try {
